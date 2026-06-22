@@ -1,10 +1,281 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Portfólio - Leonardo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leonardo Klein Rocha | Solutions Architect</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* === VARIÁVEIS DE TEMA E CORES === */
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-1: #38bdf8; /* Azul claro */
+      --accent-2: #8b5cf6; /* Roxo */
+      --accent-3: #10b981; /* Verde */
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Efeito de Background Translúcido (Vibecoder style) */
+    body::before {
+      content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+      z-index: -1; pointer-events: none;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* === NAVBAR === */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+    .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -0.5px; color: var(--text-main); text-decoration: none; }
+    .logo span { color: var(--accent-1); }
+    .social-links a { color: var(--text-main); margin-left: 20px; font-size: 1.2rem; transition: 0.3s; }
+    .social-links a:hover { color: var(--accent-1); transform: translateY(-2px); }
+
+    /* === HERO SECTION === */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+    .hero-content { max-width: 800px; }
+    .badge-role { display: inline-block; padding: 6px 12px; background: rgba(56, 189, 248, 0.1); color: var(--accent-1); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; border: 1px solid rgba(56, 189, 248, 0.2); }
+    .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+    .gradient-text { background: linear-gradient(to right, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; max-width: 600px; }
+    .btn-primary { display: inline-block; padding: 15px 30px; background: var(--text-main); color: var(--bg-dark); text-decoration: none; font-weight: 700; border-radius: 8px; transition: 0.3s; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+
+    /* === PORTFOLIO GRID === */
+    .portfolio-section { padding: 100px 0; }
+    .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 50px; display: flex; align-items: center; gap: 15px; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+    
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-10px); border-color: var(--accent-2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+    .card-icon { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent-1); }
+    .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main); }
+    .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+    
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tag { font-size: 0.75rem; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+    
+    .card-link { font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; font-size: 0.9rem; margin-top: auto; }
+    .card:hover .card-link { color: var(--accent-1); }
+
+    /* === MODAL DE ESTUDO DE CASO === */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; padding: 20px; }
+    .modal-overlay.active { display: flex; opacity: 1; }
+    
+    .modal-content { background: var(--bg-card); width: 100%; max-width: 800px; max-height: 90vh; border-radius: 16px; border: 1px solid var(--border); overflow-y: auto; position: relative; transform: translateY(20px); transition: 0.3s; display: flex; flex-direction: column; }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    
+    .modal-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: 0.2s; z-index: 10; }
+    .modal-close:hover { background: #ef4444; }
+    
+    .modal-header { padding: 40px 40px 20px 40px; border-bottom: 1px solid var(--border); }
+    .modal-header h2 { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+    .modal-body { padding: 30px 40px; }
+    .modal-body h4 { color: var(--accent-1); margin-top: 25px; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+    .modal-body p, .modal-body li { color: var(--text-muted); margin-bottom: 15px; font-size: 1rem; line-height: 1.7; }
+    .modal-body ul { padding-left: 20px; margin-bottom: 20px; }
+
+    /* === FOOTER === */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+  </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; margin-top: 20%;">
-  <h1>Olá, Mundo!</h1>
-  <p>Meu portfólio de Arquitetura de Soluções está em construção.</p>
+<body>
+
+  <nav>
+    <div class="container nav-content">
+      <a href="#" class="logo">Léo<span>Klein</span></a>
+      <div class="social-links">
+        <a href="https://github.com/SEU_GITHUB_AQUI" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/SEU_LINKEDIN_AQUI" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="mailto:lklrocha@hcpa.edu.br" title="E-mail"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero container">
+    <div class="hero-content">
+      <span class="badge-role">Arquiteto de Soluções & Engenheiro de Software</span>
+      <h1>Orquestrando <br><span class="gradient-text">Inteligência e Escala</span><br> em ecossistemas Serverless.</h1>
+      <p>Desenvolvo Single Page Applications (SPAs) de alta performance, plataformas EdTech e motores de Business Intelligence utilizando integrações com IA generativa e arquitetura client-side no Google Workspace.</p>
+      <a href="#projetos" class="btn-primary">Ver Projetos <i class="fa-solid fa-arrow-down ms-2"></i></a>
+    </div>
+  </section>
+
+  <section id="projetos" class="portfolio-section container">
+    <h2 class="section-title">Estudos de Caso</h2>
+    
+    <div class="grid" id="project-grid">
+      </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Leonardo Klein Rocha. Desenvolvido com Vanilla JS e CSS Grid.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="project-modal" onclick="fecharModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <div class="tags" id="modal-tags"></div>
+        <h2 id="modal-title">Título</h2>
+        <p id="modal-subtitle" style="color: var(--text-muted); font-size: 1.1rem;"></p>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // 1. BANCO DE DADOS DOS PROJETOS (Substitui múltiplas páginas HTML)
+    const projetos = [
+      {
+        id: 'moogia',
+        icon: 'fa-solid fa-cow',
+        title: 'MoogIA: EdTech Gamificada',
+        subtitle: 'Estação de estudos com IA Generativa e processamento in-browser.',
+        tags: ['SaaS', 'Google Gemini', 'Gamification', 'SPA'],
+        shortDesc: 'Plataforma EdTech serverless com gamificação (Duolingo-style). Transforma PDFs em jornadas ativas com flashcards, mapas mentais, simulados e copiloto IA.',
+        problem: 'Estudantes sofrem com a fadiga cognitiva da leitura passiva de PDFs e gastam fortunas em plataformas fragmentadas de questões e resumos.',
+        solution: 'Uma SPA serverless no Google Workspace que integra a API do Gemini. A arquitetura transfere o processamento de PDFs para o navegador do usuário (Client-Side), gerando Mapas Mentais (Mermaid.js), Flashcards e Simulados com gabarito comentado a partir de documentos.',
+        impact: 'Criação de um produto pronto para monetização (SaaS Freemium) com custo zero de infraestrutura. Gatilhos de retenção diária através de "Streaks" de XP e assistência de uma mascote IA (MooDicas).'
+      },
+      {
+        id: 'rhc-pro',
+        icon: 'fa-solid fa-server',
+        title: 'RHC Pro v2: Clinical Data Hub',
+        subtitle: 'Governança de Dados e Business Intelligence Oncológico.',
+        tags: ['Business Intelligence', 'Data Mining', 'Chart.js', 'Library/Shell'],
+        shortDesc: 'Hub central com auditoria automatizada, filtros em milissegundos via Smart Cache e renderização de relatórios PDF in-browser (Arquitetura Library/Shell).',
+        problem: 'O Registro Hospitalar de Câncer operava com mais de 70 abas de planilhas dispersas, resultando em lentidão analítica e perda da "memória institucional" sobre as triagens clínicas.',
+        solution: 'Adoção da arquitetura Library/Shell no Apps Script. Um núcleo de código central alimenta dezenas de "planilhas cascas". Implementei um motor de BI com Smart Cache (localStorage) e um "Auditor do Tempo" que cruza bases recursivamente para achar pacientes perdidos no funil de diagnóstico.',
+        impact: 'Dashboards analíticos (Chart.js) que filtram milhares de linhas instantaneamente. Geração de relatórios executivos em PDF nativos no navegador, eliminando o trabalho braçal de mineração de dados.'
+      },
+      {
+        id: 'estudio-pdf',
+        icon: 'fa-solid fa-file-pdf',
+        title: 'Estúdio PDF Pro & AI Suite',
+        subtitle: 'Manipulação segura de documentos 100% Client-Side.',
+        tags: ['LGPD Compliance', 'pdf-lib', 'Tesseract OCR', 'Serverless'],
+        shortDesc: 'Suíte de manipulação de PDFs e IA nativa. Processamento 100% no navegador para segurança LGPD total. Inclui OCR, Chat com Documentos e Leitor Imersivo.',
+        problem: 'O upload de prontuários em sites gratuitos de PDF (iLovePDF) para operações rotineiras expunha dados médicos sensíveis, gerando um imenso risco de quebra da LGPD.',
+        solution: 'Desenvolvimento de uma ferramenta onde o "servidor viaja até o navegador". O estúdio roda pesadas bibliotecas (pdf-lib, pdf.js, Tesseract) direto na RAM do usuário. Permite juntar, dividir, aplicar OCR e proteger arquivos sem que os dados trafeguem pela internet.',
+        impact: 'Risco de vazamento de dados zerado. Criação de ferramentas corporativas seguras como "Faxina de páginas em branco", "Chat com PDF fechado" e "Leitor Imersivo (TTS)" para acessibilidade.'
+      },
+      {
+        id: 'gestor-requerimentos',
+        icon: 'fa-solid fa-shield-halved',
+        title: 'Gestor de Requerimentos',
+        subtitle: 'Compliance e liberação automatizada de Prontuários.',
+        tags: ['Ticketing', 'Soft-Locking', 'Drive API', 'Workflow'],
+        shortDesc: 'Sistema de ticketing e compliance LGPD. Inclui processamento e resgate de PDFs corrompidos, soft-lock de concorrência e fila de e-mails assíncrona.',
+        problem: 'A liberação de documentos médicos sofria com concorrência destrutiva (operadores editando a mesma linha) e falta de travas de segurança quando o pedido era feito por terceiros.',
+        solution: 'Painel injetado no Google Sheets atuando como sistema de Ticketing. Implementação de "Soft-Locks" (TTL de 15 min) para concorrência. Se um terceiro solicita, o sistema provisiona uma pasta trancada no Drive, forçando a auditoria de identidade antes de liberar a API do Gmail.',
+        impact: 'Mitigação total de envios acidentais para pessoas não autorizadas. Automação do tratamento de PDFs corrompidos via fallback para Canvas HTML, reduzindo o tempo de atendimento drasticamente.'
+      },
+      {
+        id: 'samis',
+        icon: 'fa-solid fa-magnifying-glass-chart',
+        title: 'SAMIS: Inteligência de Arquivo',
+        subtitle: 'Automação massiva e OCR para arquivos médicos.',
+        tags: ['Analytics', 'Autocomplete VIP', 'Google Workspace'],
+        shortDesc: 'Plataforma de gestão documental com integração OCR. Transforma o arquivamento com banco de dados centralizado e Autocomplete com algoritmo preditivo.',
+        problem: 'Controle de documentos médicos extremamente engessado, exigindo digitação manual repetitiva de formulários padronizados e geração lenta de gráficos estatísticos.',
+        solution: 'Criação de um hub com OCR integrado para ler espelhos de documentos e preencher formulários sozinho. Destaque para o algoritmo de "Autocomplete VIP", que aprende com a volumetria da base de dados e sugere os tipos documentais mais usados primeiro.',
+        impact: 'Erradicação de dezenas de planilhas locais. Lançamento de lotes de dados otimizado, relatórios gerenciais gerados com dois cliques e aumento brutal na velocidade de data-entry da equipe.'
+      },
+      {
+        id: 'convenios',
+        icon: 'fa-solid fa-calendar-check',
+        title: 'Smart Scheduling Hub',
+        subtitle: 'Orquestração de Agendamento Cirúrgico.',
+        tags: ['Frontend Custom', 'RBAC Security', 'WhatsApp API'],
+        shortDesc: 'Substitui planilhas estáticas por um hub dinâmico com controle de acesso (RBAC), timeline visual de salas e automação de checklists via WhatsApp.',
+        problem: 'A equipe gerenciava cirurgias em uma interface visual confusa, com alto risco de apagamento acidental de dados por usuários sem treinamento.',
+        solution: 'Engenharia de um painel web sobreposto à planilha. Implementação de Role-Based Access Control (Super Admin, Recepção, Leitor). Criação de Swimlanes visuais para acompanhar a ocupação de salas cirúrgicas em tempo real.',
+        impact: 'Proteção absoluta dos dados primários. Agilidade no reagendamento via interface gráfica intuitiva e geração de links de checklist integrados com o WhatsApp Web para contato instantâneo com pacientes.'
+      }
+    ];
+
+    // 2. FUNÇÃO PARA RENDERIZAR OS CARDS NA TELA
+    function renderProjects() {
+      const grid = document.getElementById('project-grid');
+      let html = '';
+      
+      projetos.forEach(p => {
+        const tagsHtml = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+        html += `
+          <div class="card" onclick="abrirModal('${p.id}')">
+            <i class="${p.icon} card-icon"></i>
+            <h3>${p.title}</h3>
+            <p>${p.shortDesc}</p>
+            <div class="tags">${tagsHtml}</div>
+            <div class="card-link">Explorar a Arquitetura <i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    }
+
+    // 3. LÓGICA DO MODAL (Estudo de Caso)
+    function abrirModal(id) {
+      const projeto = projetos.find(p => p.id === id);
+      if(!projeto) return;
+
+      document.getElementById('modal-tags').innerHTML = projeto.tags.map(t => `<span class="tag">${t}</span>`).join('');
+      document.getElementById('modal-title').innerText = projeto.title;
+      document.getElementById('modal-subtitle').innerText = projeto.subtitle;
+      
+      document.getElementById('modal-body-content').innerHTML = `
+        <h4><i class="fa-solid fa-triangle-exclamation me-2"></i> O Desafio Operacional</h4>
+        <p>${projeto.problem}</p>
+        
+        <h4><i class="fa-solid fa-code me-2"></i> Arquitetura & Engenharia</h4>
+        <p>${projeto.solution}</p>
+        
+        <h4><i class="fa-solid fa-rocket me-2"></i> Impacto & Escalabilidade</h4>
+        <p>${projeto.impact}</p>
+      `;
+
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Impede rolar a tela de fundo
+    }
+
+    function fecharModal(event) {
+      // Se tiver evento, fecha só se clicou fora da caixa branca
+      if(event && event.target.id !== 'project-modal') return;
+      
+      document.getElementById('project-modal').classList.remove('active');
+      document.body.style.overflow = 'auto'; // Devolve o scroll
+    }
+
+    // Inicia a aplicação
+    renderProjects();
+  </script>
 </body>
 </html>
