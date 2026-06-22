@@ -928,6 +928,107 @@
       margin-top: 3px;
     }
 
+
+    /* ==========================================================================
+       8. PROFESSIONAL PORTRAITS
+       Galeria pessoal posicionada depois dos projetos para ampliar a página
+       sem competir com a proposta técnica da abertura.
+       ========================================================================== */
+
+    .profile-gallery-section {
+      padding: 92px 0 34px;
+    }
+
+    .profile-gallery {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr 0.95fr;
+      gap: 20px;
+    }
+
+    .portrait-card {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .portrait-card:first-child {
+      grid-row: span 2;
+      min-height: 620px;
+    }
+
+    .portrait-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(74, 204, 255, 0.62);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .portrait-card:hover img {
+      transform: scale(1.045);
+    }
+
+    .portrait-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        transparent 36%,
+        rgba(5, 15, 34, 0.14) 58%,
+        rgba(5, 15, 34, 0.85) 100%
+      );
+    }
+
+    .portrait-caption {
+      position: absolute;
+      z-index: 2;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      color: #ffffff;
+    }
+
+    .portrait-caption span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(10px);
+      font: 500 0.63rem "DM Mono", monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .portrait-caption h3 {
+      margin: 10px 0 0;
+      font-size: 1.12rem;
+      line-height: 1.28;
+      letter-spacing: -0.4px;
+    }
+
+    .portrait-caption p {
+      margin: 5px 0 0;
+      font-size: 0.77rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
     /* ==========================================================================
        8. PROJECT GRID
        ========================================================================== */
@@ -1351,6 +1452,18 @@
       }
     }
 
+
+    @media (max-width: 1010px) {
+      .profile-gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .portrait-card:first-child {
+        grid-row: auto;
+        min-height: 500px;
+      }
+    }
+
     @media (max-width: 720px) {
       :root {
         --nav-h: 66px;
@@ -1395,8 +1508,14 @@
 
       .focus-row,
       .project-grid,
-      .project-content {
+      .project-content,
+      .profile-gallery {
         grid-template-columns: 1fr;
+      }
+
+      .portrait-card,
+      .portrait-card:first-child {
+        min-height: 430px;
       }
 
       .aside {
@@ -1438,7 +1557,7 @@
       </a>
 
       <div class="nav-links">
-        <a href="#sobre" onclick="closeProject({ target: 'sobre' });">Sobre</a>
+        <a href="#perfil" onclick="closeProject({ target: 'perfil' });">Perfil</a>
         <a href="#projetos" onclick="closeProject({ target: 'projetos' });">Portfólio</a>
         <a
           class="github-link"
@@ -1601,6 +1720,86 @@
       </div><!-- /.hero-grid -->
     </section>
 
+    <!-- PROJETOS -->
+    <section id="projetos" class="section container">
+      <div class="section-top">
+        <div>
+          <div class="section-kicker">Selected work / 2026</div>
+          <h2 class="section-title">
+            Sistemas que transformam<br />
+            complexidade em fluidez.
+          </h2>
+        </div>
+
+        <p class="section-copy">
+          Estudos de caso de produtos construídos para ambientes reais: hospitais, dados sensíveis, operações críticas,
+          usuários sob pressão e fluxos que não aceitam “funcionar mais ou menos”.
+        </p>
+      </div>
+
+      <div id="project-grid" class="project-grid" aria-live="polite"></div>
+
+    </section>
+
+    <!-- GALERIA PROFISSIONAL -->
+    <section id="perfil" class="profile-gallery-section container">
+      <div class="section-top">
+        <div>
+          <div class="section-kicker">Profile / presença profissional</div>
+          <h2 class="section-title">
+            Pessoas, processos<br />
+            e soluções em movimento.
+          </h2>
+        </div>
+
+        <p class="section-copy">
+          Tecnologia só gera valor quando se conecta com quem opera, decide e constrói o dia a dia.
+          Esta página também é sobre essa dimensão humana do trabalho.
+        </p>
+      </div>
+
+      <div class="profile-gallery">
+        <article class="portrait-card">
+          <img
+            src="https://i.ibb.co/QvxxW4Lt/Whats-App-Image-2026-06-18-at-18-34-57-3.jpg"
+            alt="Leonardo Klein Rocha em ambiente profissional"
+            loading="lazy"
+          />
+          <div class="portrait-caption">
+            <span><i class="fa-solid fa-sitemap"></i> Arquitetura de soluções</span>
+            <h3>Estratégia, tecnologia e execução.</h3>
+            <p>Conectar a complexidade da operação com uma experiência clara para quem precisa fazer acontecer.</p>
+          </div>
+        </article>
+
+        <article class="portrait-card">
+          <img
+            src="https://i.ibb.co/BHBCZL1P/Whats-App-Image-2026-06-18-at-18-34-57.jpg"
+            alt="Leonardo Klein Rocha trabalhando em escritório"
+            loading="lazy"
+          />
+          <div class="portrait-caption">
+            <span><i class="fa-solid fa-lightbulb"></i> Pensamento aplicado</span>
+            <h3>Do problema à solução.</h3>
+            <p>Desenho de fluxos, dados, governança e interfaces a partir de necessidades reais.</p>
+          </div>
+        </article>
+
+        <article class="portrait-card">
+          <img
+            src="https://i.ibb.co/JRf0n2mL/Whats-App-Image-2026-06-18-at-18-34-56.jpg"
+            alt="Leonardo Klein Rocha utilizando computador em ambiente profissional"
+            loading="lazy"
+          />
+          <div class="portrait-caption">
+            <span><i class="fa-solid fa-laptop-code"></i> Construção contínua</span>
+            <h3>Produtos que evoluem com a operação.</h3>
+            <p>Automação, IA e software como ferramentas de ganho prático para as equipes.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <!-- SOBRE -->
     <section id="sobre" class="section container">
       <div class="section-top">
@@ -1705,25 +1904,7 @@
       </div>
     </section>
 
-    <!-- PROJETOS -->
-    <section id="projetos" class="section container">
-      <div class="section-top">
-        <div>
-          <div class="section-kicker">Selected work / 2026</div>
-          <h2 class="section-title">
-            Sistemas que transformam<br />
-            complexidade em fluidez.
-          </h2>
-        </div>
 
-        <p class="section-copy">
-          Estudos de caso de produtos construídos para ambientes reais: hospitais, dados sensíveis, operações críticas,
-          usuários sob pressão e fluxos que não aceitam “funcionar mais ou menos”.
-        </p>
-      </div>
-
-      <div id="project-grid" class="project-grid" aria-live="polite"></div>
-    </section>
   </main>
 
   <!-- ========================================================================
@@ -1821,8 +2002,6 @@
             do progresso. A proposta é reunir o ecossistema de aprendizagem em uma <strong>SPA gamificada e orientada por IA</strong>,
             onde cada material pode se transformar em uma sequência prática de estudo.
           </p>
-
-          <img src="https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db" alt="Capa do MoogIA">
 
           <h2><i class="fa-solid fa-gamepad"></i> Gamificação que representa progresso, não só enfeite</h2>
 
