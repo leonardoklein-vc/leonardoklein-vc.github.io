@@ -271,23 +271,41 @@
       {
         id: 'rhc-pro',
         title: 'RHC Pro v2: Clinical Data Hub',
-        subtitle: 'Governança de Dados, Auditoria Automática e Business Intelligence Oncológico.',
+        subtitle: 'Governança de Dados, Auditoria Automatizada e Business Intelligence Oncológico Serverless.',
         thumb: 'https://github.com/user-attachments/assets/image_2b8a62.png',
         heroImg: 'https://github.com/user-attachments/assets/image_2b8a62.png',
-        tags: ['Business Intelligence', 'Data Mining', 'Library/Shell'],
-        techs: ['Google Sheets DB', 'Chart.js', 'html2pdf.js', 'Regex'],
-        metrics: ['Filtros visuais em milissegundos', 'Relatórios PDF In-Browser', 'Auditoria Temporal Dinâmica'],
+        tags: ['Business Intelligence', 'Data Mining', 'Library/Shell', 'SaaS Interno'],
+        techs: ['Google Apps Script', 'Vanilla JS', 'Chart.js', 'html2pdf.js'],
+        metrics: ['Zero Custo de Infraestrutura', 'Filtros de BI em Milissegundos', 'Auditoria Temporal Dinâmica (-12/+2)'],
         article: `
-          <h2>Fragmentação Crítica</h2>
-          <p>O Registro Hospitalar operava com mais de 70 abas de planilhas dispersas, resultando em lentidão analítica e perda de rastreabilidade clínica em auditorias.</p>
-          
-          <h2>Padrão Library/Shell</h2>
-          <p>Desenvolvi o sistema isolando o motor lógico em uma biblioteca central e as planilhas dos operadores como meras "cascas". Atualizações no código refletem em toda a operação instantaneamente.</p>
-          
-          <img src="https://github.com/user-attachments/assets/image_2b8a23.jpg" alt="Gestor RHC">
+          <h2><i class="fa-solid fa-triangle-exclamation me-2"></i> O Caos Analógico: A Dor do Cliente</h2>
+          <p>O Registro Hospitalar de Câncer lidava com um volume de dados clínicos massivo e descentralizado. O cenário anterior era insustentável: a operação dependia de <strong>mais de 70 abas de planilhas dispersas</strong>.</p>
+          <p>Levantamentos de KPIs (como o indicador da Lei dos 60 Dias) demoravam semanas de mineração manual, e qualquer erro de digitação corrompia a "memória institucional" sem deixar rastros para auditoria.</p>
 
-          <h2>Smart Cache e BI no Navegador</h2>
-          <p>O motor de Business Intelligence consolida milhares de linhas no <code>localStorage</code> do navegador. Os cruzamentos de dados (Idade + CID + Tratamento) e a renderização de gráficos ocorrem em milissegundos sem requisições ao servidor, permitindo gerar um PDF de apresentação direto da tela.</p>
+          <img src="https://github.com/user-attachments/assets/image_2b8ac6.jpg" alt="A Planilha Antiga e o Caos Analógico">
+
+          <h2><i class="fa-solid fa-sitemap me-2"></i> A Virada Arquitetônica: Padrão Library/Shell</h2>
+          <p>Para escalar o sistema com custo zero de infraestrutura e facilitar manutenções futuras, implementei uma arquitetura de microsserviços nativa no Google Workspace conhecida como <strong>Library/Shell</strong>.</p>
+          <ul>
+            <li><strong>O Motor (Core):</strong> Toda a lógica pesada, algoritmos de mineração e interfaces visuais residem em um repositório centralizado e oculto.</li>
+            <li><strong>As Cascas (Shells):</strong> As planilhas operacionais funcionam apenas como "terminais burros". Se uma regra clínica muda, eu atualizo o <em>Core</em> e a alteração reflete instantaneamente em todo o hospital, sem risco de quebra de versão.</li>
+          </ul>
+
+          <img src="https://github.com/user-attachments/assets/image_2b8a23.jpg" alt="Gestor RHC e Workflow Guiado">
+
+          <h2><i class="fa-solid fa-bolt me-2"></i> O Pulo do Gato: Smart Caching e BI In-Browser</h2>
+          <p>O limite de execução de scripts em nuvem (6 minutos no Google Servers) era o maior gargalo. A solução? <strong>Inverter a carga de processamento.</strong></p>
+          <p>Desenvolvi um motor de <em>Business Intelligence</em> que faz o download da base mastigada e a armazena no <code>localStorage</code> do navegador do usuário. O resultado é um Dashboard de alta performance (construído com Chart.js) onde o cruzamento de dados demográficos, topografia do câncer (CIDs) e tratamentos acontece em <strong>milissegundos</strong>, sem nunca recarregar a página.</p>
+
+          <h2><i class="fa-solid fa-clock-rotate-left me-2"></i> Auditoria Contínua: A "Máquina do Tempo"</h2>
+          <p>Para garantir a conformidade e que nenhum paciente fosse perdido no funil de diagnóstico, programei um algoritmo de auditoria cruzada. O robô varre recursivamente as pastas do Drive e aplica uma tolerância temporal matemática: ele busca pacientes faltantes justificando-os caso tenham sido tratados no passado (-12 meses) ou lançados no futuro (+2 meses). As perdas reais são isoladas para ação de <em>compliance</em> imediata.</p>
+
+          <blockquote style="font-size: 1.2rem; font-style: italic; border-left: 4px solid var(--accent-1); padding-left: 15px; margin: 30px 0; color: var(--text-main);">
+            "Transformamos um processo de conferência manual que levava dias em um cruzamento de dados com apenas um clique de 3 segundos."
+          </blockquote>
+
+          <h2><i class="fa-solid fa-file-pdf me-2"></i> Relatórios Nativos na Memória RAM</h2>
+          <p>Precisa apresentar os dados para a diretoria? O sistema clona o DOM do dashboard, aplica CSS focado em impressão, rasteriza os gráficos complexos em Canvas HTML e gera um PDF executivo multipáginas via <code>html2pdf.js</code>. Tudo processado diretamente no navegador do usuário (Client-Side), garantindo segurança absoluta dos dados sensíveis (LGPD), já que nenhum arquivo transita por servidores de terceiros para ser renderizado.</p>
         `
       },
       {
