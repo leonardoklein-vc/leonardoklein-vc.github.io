@@ -10,6 +10,7 @@
   />
 
   <title>LéuKlein | Arquitetura de Soluções</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="https://i.ibb.co/xSW1fjdt/favicon-64x64.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
@@ -1527,6 +1528,276 @@
       }
     }
 
+
+    /* ==========================================================================
+       12. PAGE ROUTER + PROFILE PAGE
+       Perfil é tratado como outra página: quando aberto, esconde hero/portfólio.
+       ========================================================================== */
+
+    body.profile-route #main-view,
+    body.profile-route #project-view {
+      display: none !important;
+    }
+
+    body.profile-route #profile-view {
+      display: block;
+    }
+
+    #profile-view {
+      display: none;
+      min-height: 100vh;
+      padding: 112px 0 72px;
+    }
+
+    .profile-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .profile-page-card,
+    .profile-photo-card,
+    .profile-bio-card,
+    .profile-stack-card {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .profile-page-card {
+      padding: 34px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-page-card::before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      right: -120px;
+      top: -110px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--cyan-soft), transparent 68%);
+      pointer-events: none;
+    }
+
+    .profile-page-card h1 {
+      position: relative;
+      z-index: 1;
+      margin: 16px 0 18px;
+      color: var(--text-strong);
+      font-size: clamp(2.4rem, 4.6vw, 4.7rem);
+      line-height: 0.98;
+      letter-spacing: -2.7px;
+    }
+
+    .profile-page-card .lead {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      max-width: 760px;
+      margin: 0 0 24px;
+    }
+
+    .profile-page-card p {
+      color: var(--muted);
+      line-height: 1.86;
+      font-size: 0.98rem;
+      margin: 0 0 16px;
+    }
+
+    .profile-page-card strong {
+      color: var(--text-strong);
+    }
+
+    .profile-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 24px 0 28px;
+    }
+
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.18);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    body.dark-mode .profile-badge {
+      background: rgba(255,255,255,0.045);
+    }
+
+    .profile-badge i {
+      color: var(--cyan);
+    }
+
+    .profile-photo-card {
+      overflow: hidden;
+      position: sticky;
+      top: 98px;
+    }
+
+    .profile-photo-card img {
+      width: 100%;
+      height: 560px;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .profile-photo-caption {
+      padding: 18px 20px 20px;
+    }
+
+    .profile-photo-caption span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 500 0.68rem "DM Mono", monospace;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .profile-photo-caption h3 {
+      margin: 0;
+      color: var(--text-strong);
+      font-size: 1.05rem;
+      letter-spacing: -0.35px;
+    }
+
+    .profile-photo-caption p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .profile-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .profile-detail {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.16);
+    }
+
+    body.dark-mode .profile-detail {
+      background: rgba(255,255,255,0.035);
+    }
+
+    .profile-detail i {
+      color: var(--cyan);
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .profile-detail b {
+      display: block;
+      color: var(--text-strong);
+      font-size: 0.86rem;
+      margin-bottom: 5px;
+    }
+
+    .profile-detail span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.55;
+    }
+
+    .profile-timeline {
+      margin-top: 26px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .profile-timeline li {
+      position: relative;
+      padding-left: 24px;
+      margin: 16px 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    .profile-timeline li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 0 5px var(--cyan-soft);
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 1010px) {
+      .profile-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-photo-card {
+        position: relative;
+        top: auto;
+        max-width: 560px;
+      }
+
+      .profile-photo-card img {
+        height: 520px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      #profile-view {
+        padding-top: 92px;
+      }
+
+      .profile-page-card {
+        padding: 24px;
+      }
+
+      .profile-page-card h1 {
+        letter-spacing: -1.9px;
+      }
+
+      .profile-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-photo-card img {
+        height: 430px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -1549,7 +1820,7 @@
 
   <nav>
     <div class="container nav-content">
-      <a class="brand" href="#hero" onclick="closeProject({ target: 'hero' });">
+      <a class="brand" href="#hero" onclick="showMainPage({ target: 'hero' }); return false;">
         <span class="brand-mark">
           <i class="fa-solid fa-code"></i>
         </span>
@@ -1557,8 +1828,8 @@
       </a>
 
       <div class="nav-links">
-        <a href="#perfil" onclick="closeProject({ target: 'perfil' });">Perfil</a>
-        <a href="#projetos" onclick="closeProject({ target: 'projetos' });">Portfólio</a>
+        <a href="#perfil" onclick="showProfilePage(); return false;">Perfil</a>
+        <a href="#projetos" onclick="showMainPage({ target: 'projetos' }); return false;">Portfólio</a>
         <a
           class="github-link"
           href="https://github.com/leonardoklein-vc"
@@ -1740,171 +2011,147 @@
       <div id="project-grid" class="project-grid" aria-live="polite"></div>
 
     </section>
+  </main>
 
-    <!-- GALERIA PROFISSIONAL -->
-    <section id="perfil" class="profile-gallery-section container">
-      <div class="section-top">
-        <div>
-          <div class="section-kicker">Profile / presença profissional</div>
-          <h2 class="section-title">
-            Pessoas, processos<br />
-            e soluções em movimento.
-          </h2>
-        </div>
 
-        <p class="section-copy">
-          Tecnologia só gera valor quando se conecta com quem opera, decide e constrói o dia a dia.
-          Esta página também é sobre essa dimensão humana do trabalho.
-        </p>
-      </div>
+  <!-- ========================================================================
+       PROFILE VIEW
+       Página independente: ao abrir Perfil, a página principal e projetos somem.
+       ======================================================================== -->
 
-      <div class="profile-gallery">
-        <article class="portrait-card">
+  <main id="profile-view">
+    <div class="container">
+      <button class="back-btn" type="button" onclick="showMainPage({ target: 'projetos' });">
+        <i class="fa-solid fa-arrow-left"></i>
+        Voltar ao portfólio
+      </button>
+
+      <div class="profile-shell" style="margin-top: 34px;">
+        <section class="profile-page-card">
+          <span class="eyebrow">
+            <span class="pulse"></span>
+            Perfil profissional · Dados · Saúde · IA
+          </span>
+
+          <h1>
+            Leonardo Klein Rocha,
+            <span class="gradient">tecnologia com pé na operação.</span>
+          </h1>
+
+          <p class="lead">
+            Sou gaúcho de Porto Alegre, formado em <strong>Gestão da Tecnologia da Informação</strong>,
+            e atuo diariamente conectando processos de saúde, análise de dados, automação e experiência do usuário.
+          </p>
+
+          <div class="profile-badge-row">
+            <span class="profile-badge"><i class="fa-solid fa-location-dot"></i> Porto Alegre / RS</span>
+            <span class="profile-badge"><i class="fa-solid fa-graduation-cap"></i> Gestão da Tecnologia da Informação</span>
+            <span class="profile-badge"><i class="fa-solid fa-hospital"></i> HCPA</span>
+            <span class="profile-badge"><i class="fa-solid fa-database"></i> Dados em Saúde</span>
+            <span class="profile-badge"><i class="fa-solid fa-brain"></i> IA aplicada</span>
+          </div>
+
+          <p>
+            Trabalho atualmente na <strong>Seção de Arquivo Médico e Informações em Saúde do HCPA</strong>,
+            em contato direto com rotinas que envolvem documentação, informação clínica, indicadores, fluxos
+            administrativos e gestão de dados. Essa vivência faz com que meus projetos não nasçam apenas de uma
+            curiosidade técnica, mas de problemas reais: retrabalho, dados dispersos, risco operacional, falta de
+            rastreabilidade e necessidade de respostas mais rápidas.
+          </p>
+
+          <p>
+            Minha formação em tecnologia me ajuda a traduzir essas dores em sistemas. Minha experiência na operação
+            me impede de desenhar soluções distantes da realidade. O resultado é um estilo de construção muito prático:
+            entender o fluxo, mapear pontos de risco, simplificar a interface, automatizar o que é repetitivo e deixar
+            os dados mais disponíveis para decisão.
+          </p>
+
+          <p>
+            Também estou em formação continuada, com pós-graduação em andamento como
+            <strong>Analista de Big Data em Saúde</strong>. Esse movimento reforça meu interesse em transformar bases
+            clínicas, planilhas, documentos e processos em informação útil, segura e acionável.
+          </p>
+
+          <ul class="profile-timeline">
+            <li>
+              <strong>Origem e identidade:</strong> gaúcho de Porto Alegre, com uma trajetória marcada por curiosidade
+              tecnológica, visão prática e vontade de melhorar processos reais.
+            </li>
+            <li>
+              <strong>Formação:</strong> graduado em Gestão da Tecnologia da Informação, com base para pensar sistemas,
+              governança, dados, automação e entrega de valor.
+            </li>
+            <li>
+              <strong>Atuação atual:</strong> trabalho na Seção de Arquivo Médico e Informações em Saúde do HCPA,
+              lidando diariamente com análise e gestão de dados em contexto hospitalar.
+            </li>
+            <li>
+              <strong>Especialização em andamento:</strong> pós-graduação em Analista de Big Data em Saúde, ampliando
+              a visão sobre dados, indicadores e inteligência aplicada ao cuidado e à gestão.
+            </li>
+          </ul>
+
+          <div class="profile-detail-grid">
+            <div class="profile-detail">
+              <i class="fa-solid fa-chart-line"></i>
+              <b>Análise e gestão de dados</b>
+              <span>Indicadores, bases operacionais, painéis, auditoria e informação para decisão.</span>
+            </div>
+
+            <div class="profile-detail">
+              <i class="fa-solid fa-cubes"></i>
+              <b>Arquitetura serverless</b>
+              <span>Google Apps Script, Google Sheets, Drive API, SPAs e padrão Library/Shell.</span>
+            </div>
+
+            <div class="profile-detail">
+              <i class="fa-solid fa-user-shield"></i>
+              <b>Saúde e governança</b>
+              <span>Fluxos sensíveis, LGPD, rastreabilidade, documentação e segurança operacional.</span>
+            </div>
+
+            <div class="profile-detail">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <b>IA aplicada ao trabalho</b>
+              <span>Automação, síntese, apoio à leitura, geração de conhecimento e produtividade real.</span>
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <a href="#projetos" class="btn btn-primary" onclick="showMainPage({ target: 'projetos' }); return false;">
+              Ver projetos
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <a
+              href="https://github.com/leonardoklein-vc"
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fa-brands fa-github"></i>
+              GitHub
+            </a>
+          </div>
+        </section>
+
+        <aside class="profile-photo-card">
           <img
             src="https://i.ibb.co/QvxxW4Lt/Whats-App-Image-2026-06-18-at-18-34-57-3.jpg"
             alt="Leonardo Klein Rocha em ambiente profissional"
-            loading="lazy"
+            loading="eager"
           />
-          <div class="portrait-caption">
+
+          <div class="profile-photo-caption">
             <span><i class="fa-solid fa-sitemap"></i> Arquitetura de soluções</span>
             <h3>Estratégia, tecnologia e execução.</h3>
-            <p>Conectar a complexidade da operação com uma experiência clara para quem precisa fazer acontecer.</p>
+            <p>
+              Uma atuação conectada à rotina: dados, processos, pessoas e sistemas que precisam funcionar no mundo real.
+            </p>
           </div>
-        </article>
-
-        <article class="portrait-card">
-          <img
-            src="https://i.ibb.co/BHBCZL1P/Whats-App-Image-2026-06-18-at-18-34-57.jpg"
-            alt="Leonardo Klein Rocha trabalhando em escritório"
-            loading="lazy"
-          />
-          <div class="portrait-caption">
-            <span><i class="fa-solid fa-lightbulb"></i> Pensamento aplicado</span>
-            <h3>Do problema à solução.</h3>
-            <p>Desenho de fluxos, dados, governança e interfaces a partir de necessidades reais.</p>
-          </div>
-        </article>
-
-        <article class="portrait-card">
-          <img
-            src="https://i.ibb.co/JRf0n2mL/Whats-App-Image-2026-06-18-at-18-34-56.jpg"
-            alt="Leonardo Klein Rocha utilizando computador em ambiente profissional"
-            loading="lazy"
-          />
-          <div class="portrait-caption">
-            <span><i class="fa-solid fa-laptop-code"></i> Construção contínua</span>
-            <h3>Produtos que evoluem com a operação.</h3>
-            <p>Automação, IA e software como ferramentas de ganho prático para as equipes.</p>
-          </div>
-        </article>
+        </aside>
       </div>
-    </section>
-
-    <!-- SOBRE -->
-    <section id="sobre" class="section container">
-      <div class="section-top">
-        <div>
-          <div class="section-kicker">About / perfil profissional</div>
-          <h2 class="section-title">
-            Tecnologia aplicada<br />
-            ao trabalho real.
-          </h2>
-        </div>
-
-        <p class="section-copy">
-          Uma apresentação focada no que o portfólio demonstra: problemas reais, decisões de arquitetura, produtos
-          úteis e sistemas que reduzem erro onde a operação é sensível.
-        </p>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-main">
-          <h3>Leonardo Klein Rocha — “LéuKlein”</h3>
-
-          <p>
-            Atuo na interseção entre <strong>operações em saúde, dados, automação, IA e experiência do usuário</strong>.
-            Meu foco é reconhecer o momento em que um processo deixa de ser apenas uma planilha e passa a exigir
-            arquitetura: regras claras, rastreabilidade, segurança, interfaces que reduzem erro e uma base sustentável
-            para evoluir.
-          </p>
-
-          <p>
-            Em vez de começar pela tecnologia, começo pelo fluxo: quem opera, onde há retrabalho, quais decisões precisam
-            ser auditáveis, quais dados não podem se perder e quais etapas geram risco. A partir disso, desenho SPAs
-            serverless no ecossistema Google Workspace, com processamento no navegador quando isso reduz custo, melhora
-            desempenho e protege dados sensíveis.
-          </p>
-
-          <p>
-            Este portfólio consolida projetos em BI oncológico, gestão cirúrgica, requerimentos de prontuários,
-            processamento privado de PDFs, gestão documental e uma EdTech gamificada com IA generativa. Evitei inserir
-            formação acadêmica específica porque ela não foi informada aqui; o texto privilegia evidências dos projetos.
-          </p>
-        </div>
-
-        <div class="about-side">
-          <div class="about-fact">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <div>
-              <strong>Domínio de atuação</strong>
-              <span>Operações hospitalares, dados clínicos, compliance, produtividade e fluxos administrativos sensíveis.</span>
-            </div>
-          </div>
-
-          <div class="about-fact">
-            <i class="fa-solid fa-cubes"></i>
-            <div>
-              <strong>Arquitetura</strong>
-              <span>SPAs serverless, Library/Shell, Apps Script, integrações Workspace e automação orientada a processos.</span>
-            </div>
-          </div>
-
-          <div class="about-fact">
-            <i class="fa-solid fa-user-shield"></i>
-            <div>
-              <strong>Princípios</strong>
-              <span>LGPD, rastreabilidade, performance percebida, redução de fadiga cognitiva e UX para ambientes de pressão.</span>
-            </div>
-          </div>
-
-          <div class="about-fact">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <div>
-              <strong>IA aplicada</strong>
-              <span>IA como instrumento de trabalho: extração, síntese, estudo, automação contextual e apoio operacional.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="focus-row">
-        <div class="focus-card">
-          <i class="fa-solid fa-hospital"></i>
-          <b>HealthTech</b>
-          <span>Fluxos críticos, dados sensíveis e equipes operando em rotina real.</span>
-        </div>
-
-        <div class="focus-card">
-          <i class="fa-solid fa-chart-line"></i>
-          <b>Dados & BI</b>
-          <span>Indicadores acionáveis, auditoria e dashboards voltados à decisão.</span>
-        </div>
-
-        <div class="focus-card">
-          <i class="fa-solid fa-lock"></i>
-          <b>Segurança</b>
-          <span>LGPD, controle de acesso, soft-locking e processamento local.</span>
-        </div>
-
-        <div class="focus-card">
-          <i class="fa-solid fa-rocket"></i>
-          <b>Produto</b>
-          <span>Interfaces que fazem a equipe ganhar tempo hoje e escalar amanhã.</span>
-        </div>
-      </div>
-    </section>
-
-
+    </div>
   </main>
 
   <!-- ========================================================================
@@ -2616,6 +2863,50 @@
         .join("");
     }
 
+
+    /* ==========================================================================
+       3.1. PAGE ROUTER
+       ========================================================================== */
+
+    function setActiveRoute(route, target = "hero") {
+      const mainView = $("#main-view");
+      const projectView = $("#project-view");
+      const profileView = $("#profile-view");
+
+      if (route === "profile") {
+        document.body.classList.add("profile-route");
+        if (mainView) mainView.style.display = "none";
+        if (projectView) projectView.style.display = "none";
+        if (profileView) profileView.style.display = "block";
+        history.replaceState(null, "", "#perfil");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      document.body.classList.remove("profile-route");
+      if (profileView) profileView.style.display = "none";
+      if (projectView) projectView.style.display = "none";
+      if (mainView) mainView.style.display = "block";
+
+      history.replaceState(null, "", `#${target}`);
+
+      setTimeout(() => {
+        document.getElementById(target)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 30);
+    }
+
+    function showProfilePage() {
+      setActiveRoute("profile");
+    }
+
+    function showMainPage(options = {}) {
+      const target = options.target || "hero";
+      setActiveRoute("main", target);
+    }
+
     /* ==========================================================================
        4. SPA ROUTER
        ========================================================================== */
@@ -2651,6 +2942,10 @@
         cover.style.display = "none";
       };
 
+      document.body.classList.remove("profile-route");
+      const profileView = $("#profile-view");
+      if (profileView) profileView.style.display = "none";
+
       $("#main-view").style.display = "none";
       $("#project-view").style.display = "block";
 
@@ -2660,18 +2955,7 @@
 
     function closeProject(options = {}) {
       const target = options.target || "projetos";
-
-      $("#project-view").style.display = "none";
-      $("#main-view").style.display = "block";
-
-      history.replaceState(null, "", `#${target}`);
-
-      setTimeout(() => {
-        document.getElementById(target)?.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }, 30);
+      showMainPage({ target });
     }
 
     /* ==========================================================================
@@ -2802,6 +3086,11 @@
       renderGrid();
 
       const hash = window.location.hash.slice(1);
+
+      if (hash === "perfil") {
+        showProfilePage();
+        return;
+      }
 
       if (hash && projetos.some((project) => project.id === hash)) {
         openProject(hash);
