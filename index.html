@@ -18,8 +18,8 @@
       --bg-nav: rgba(15, 23, 42, 0.85);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --accent-1: #38bdf8; /* Azul vibrante */
-      --accent-2: #c084fc; /* Roxo vibrante */
+      --accent-1: #38bdf8;
+      --accent-2: #c084fc;
       --border: rgba(255, 255, 255, 0.1);
       --blob-1: rgba(56, 189, 248, 0.15);
       --blob-2: rgba(192, 132, 252, 0.15);
@@ -84,9 +84,7 @@
 
     /* === HERO SECTION === */
     .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
-    
     .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center; width: 100%; }
-    
     .hero-content { animation: slideUp 0.8s ease-out forwards; opacity: 0; transform: translateY(30px); }
     @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
@@ -100,10 +98,10 @@
     .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 15px 35px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: white; text-decoration: none; font-weight: 800; border-radius: 12px; transition: 0.3s; box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2); border: none; cursor: pointer; }
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(56, 189, 248, 0.4); }
 
-    /* === HERO VISUAL (LADO DIREITO) === */
+    /* === HERO VISUAL (3D PANEL & SPARKS) === */
     .hero-visual { position: relative; width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
     
-    .glass-panel { width: 320px; height: 220px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(12px); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 15px; transform: rotateY(-15deg) rotateX(5deg); animation: floatPanel 6s ease-in-out infinite; }
+    .glass-panel { width: 320px; height: 220px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(12px); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; gap: 15px; transform: rotateY(-15deg) rotateX(5deg); animation: floatPanel 6s ease-in-out infinite; z-index: 10; }
     
     .glass-header { display: flex; gap: 8px; }
     .dot { width: 12px; height: 12px; border-radius: 50%; }
@@ -113,17 +111,25 @@
     .glass-line.w-75 { width: 75%; } .glass-line.w-50 { width: 50%; } .glass-line.w-100 { width: 100%; }
     .glass-chart { flex-grow: 1; border-radius: 8px; background: linear-gradient(to top, rgba(56, 189, 248, 0.2), transparent); border-bottom: 2px solid var(--accent-1); position: relative; }
     
-    .floating-badge { position: absolute; background: var(--bg-nav); border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: var(--shadow); font-weight: 700; font-size: 0.9rem; color: var(--text-main); display: flex; align-items: center; gap: 10px; animation: floatBadge 4s ease-in-out infinite alternate; }
+    .floating-badge { position: absolute; background: var(--bg-nav); border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(10px); box-shadow: var(--shadow); font-weight: 700; font-size: 0.9rem; color: var(--text-main); display: flex; align-items: center; gap: 10px; animation: floatBadge 4s ease-in-out infinite alternate; z-index: 15; }
     .floating-badge i { font-size: 1.2rem; color: var(--accent-1); }
     
     .badge-1 { top: 10%; right: 5%; animation-delay: 0s; }
     .badge-2 { bottom: 15%; left: 0%; animation-delay: 1.5s; }
     .badge-3 { top: 40%; left: -10%; animation-delay: 0.7s; }
 
+    /* Partículas / Sparks */
+    .spark { position: absolute; background: var(--accent-1); border-radius: 50%; filter: blur(2px); animation: floatSpark linear infinite; opacity: 0; }
+    .s1 { width: 6px; height: 6px; top: 80%; left: 20%; animation-duration: 4s; animation-delay: 0s; }
+    .s2 { width: 4px; height: 4px; top: 70%; left: 80%; animation-duration: 5s; animation-delay: 1s; background: var(--accent-2); }
+    .s3 { width: 8px; height: 8px; top: 90%; left: 50%; animation-duration: 3.5s; animation-delay: 2s; }
+    .s4 { width: 5px; height: 5px; top: 60%; left: 10%; animation-duration: 6s; animation-delay: 0.5s; background: var(--accent-2); }
+    .s5 { width: 7px; height: 7px; top: 85%; left: 90%; animation-duration: 4.5s; animation-delay: 1.5s; }
+
     @keyframes floatPanel { 0%, 100% { transform: rotateY(-15deg) rotateX(5deg) translateY(0); } 50% { transform: rotateY(-10deg) rotateX(2deg) translateY(-20px); } }
     @keyframes floatBadge { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+    @keyframes floatSpark { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.5; } 100% { transform: translateY(-150px) scale(0); opacity: 0; } }
 
-    /* Responsividade */
     @media (max-width: 992px) {
       .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
       .hero-content { display: flex; flex-direction: column; align-items: center; margin: 0 auto; }
@@ -140,7 +146,6 @@
     .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px; transition: 0.4s; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; backdrop-filter: blur(10px); box-shadow: var(--shadow); }
     .card:hover { transform: translateY(-10px); border-color: var(--accent-1); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
     
-    /* Imagem de Capa no Card */
     .card-img-wrapper { width: 100%; height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; background: var(--border); }
     .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
     .card:hover .card-img-wrapper img { transform: scale(1.05); }
@@ -151,9 +156,13 @@
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .tag { font-size: 0.7rem; padding: 6px 12px; border-radius: 20px; background: var(--border); color: var(--text-main); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
     
+    .card-link { font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; font-size: 0.9rem; margin-top: auto; }
+    .card:hover .card-link { color: var(--accent-1); }
+
     /* === PÁGINA DEDICADA DO PROJETO (ROUTER SPA) === */
-    #main-view { transition: 0.4s; }
+    #main-view { transition: 0.4s; display: block; }
     #project-view { display: none; padding-top: 100px; padding-bottom: 100px; animation: fadeIn 0.5s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     
     .back-btn { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 40px; transition: 0.3s; }
     .back-btn:hover { background: var(--border); transform: translateX(-5px); }
@@ -216,7 +225,12 @@
         </div>
 
         <div class="hero-visual">
-          
+          <div class="spark s1"></div>
+          <div class="spark s2"></div>
+          <div class="spark s3"></div>
+          <div class="spark s4"></div>
+          <div class="spark s5"></div>
+
           <div class="floating-badge badge-1">
             <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-2);"></i> Gemini AI
           </div>
@@ -240,10 +254,15 @@
             <div class="glass-line w-100"></div>
             <div class="glass-chart"></div>
           </div>
-          
         </div>
 
       </div>
+    </section>
+
+    <section id="projetos" class="container" style="padding-bottom: 100px;">
+      <h2 class="section-title">Estudos de Caso</h2>
+      <div class="grid" id="project-grid">
+        </div>
     </section>
   </div>
 
@@ -295,7 +314,7 @@
       themeIcon.classList.replace(isLight ? 'fa-moon' : 'fa-sun', isLight ? 'fa-sun' : 'fa-moon');
     }
 
-    // === 2. BANCO DE DADOS DOS PROJETOS ===
+    // === 2. BANCO DE DADOS DOS PROJETOS (TODOS OS 6 PROJETOS INCLUÍDOS) ===
     const projetos = [
       {
         id: 'moogia',
@@ -338,40 +357,32 @@
         article: `
           <h2><i class="fa-solid fa-triangle-exclamation me-2"></i> O Caos Analógico: A Dor do Cliente</h2>
           <p>O Registro Hospitalar de Câncer lidava com um volume de dados clínicos massivo e descentralizado. O cenário anterior era insustentável: a operação dependia de <strong>mais de 70 abas de planilhas dispersas</strong>.</p>
-          <p>Levantamentos de KPIs (como o indicador da Lei dos 60 Dias) demoravam semanas de mineração manual, e qualquer erro de digitação corrompia a "memória institucional" sem deixar rastros para auditoria.</p>
+          <p>Levantamentos de KPIs demoravam semanas de mineração manual, e qualquer erro corrompia a memória institucional.</p>
 
           <img src="https://github.com/user-attachments/assets/9f081a57-8189-47ad-8c1e-1d16de115192" alt="A Planilha Antiga e o Caos Analógico">
 
           <h2><i class="fa-solid fa-sitemap me-2"></i> A Virada Arquitetônica: Padrão Library/Shell</h2>
           <p>Para escalar o sistema com custo zero de infraestrutura e facilitar manutenções futuras, implementei uma arquitetura de microsserviços nativa no Google Workspace conhecida como <strong>Library/Shell</strong>.</p>
           <ul>
-            <li><strong>O Motor (Core):</strong> Toda a lógica pesada, algoritmos de mineração e interfaces visuais residem em um repositório centralizado e oculto. O script de integração categoriza dinamicamente os setores de atendimento, identificando com precisão contextos operacionais como <strong>BLOCO, CCA ou HEMODINÂMICA</strong> para aplicar regras específicas e rotear os dados corretamente.</li>
-            <li><strong>As Cascas (Shells):</strong> As planilhas operacionais funcionam apenas como "terminais burros". Se uma regra clínica muda, a atualização no <em>Core</em> reflete instantaneamente em todo o hospital, sem risco de quebra de versão.</li>
+            <li><strong>O Motor (Core):</strong> Toda a lógica pesada e interfaces visuais residem em um repositório centralizado. O script roteia dados para setores operacionais como <strong>BLOCO, CCA ou HEMODINÂMICA</strong>.</li>
+            <li><strong>As Cascas (Shells):</strong> As planilhas operacionais funcionam apenas como "terminais burros".</li>
           </ul>
 
           <img src="https://github.com/user-attachments/assets/8eb5d33c-8fa3-48c2-998b-64816ea79840" alt="Gestor RHC e Workflow Guiado">
 
-          <h2><i class="fa-solid fa-bolt me-2"></i> O Pulo do Gato: Smart Caching e BI In-Browser</h2>
-          <p>O limite de execução de scripts em nuvem (6 minutos no Google Servers) era o maior gargalo. A solução? <strong>Inverter a carga de processamento.</strong></p>
-          <p>Desenvolvi um motor de <em>Business Intelligence</em> que faz o download da base mastigada e a armazena no <code>localStorage</code> do navegador do usuário. O resultado é um Dashboard de alta performance (construído com Chart.js) onde o cruzamento de dados demográficos, topografia do câncer (CIDs) e tratamentos acontece em <strong>milissegundos</strong>, sem nunca recarregar a página.</p>
+          <h2><i class="fa-solid fa-bolt me-2"></i> Smart Caching e BI In-Browser</h2>
+          <p>Desenvolvi um motor de <em>Business Intelligence</em> que faz o download da base mastigada e a armazena no <code>localStorage</code> do navegador. O cruzamento de dados demográficos, topografia do câncer e tratamentos acontece em <strong>milissegundos</strong>.</p>
 
           <h2><i class="fa-solid fa-clock-rotate-left me-2"></i> Auditoria Contínua: A "Máquina do Tempo"</h2>
-          <p>Para garantir a conformidade e que nenhum paciente fosse perdido no funil de diagnóstico, programei um algoritmo de auditoria cruzada. O robô varre recursivamente as pastas do Drive e aplica uma tolerância temporal matemática: ele busca pacientes faltantes justificando-os caso tenham sido tratados no passado (-12 meses) ou lançados no futuro (+2 meses). As perdas reais são isoladas para ação de <em>compliance</em> imediata.</p>
-
-          <blockquote>
-            "Transformamos um processo de conferência manual que levava dias em um cruzamento de dados com apenas um clique de 3 segundos."
-          </blockquote>
-
-          <h2><i class="fa-solid fa-file-pdf me-2"></i> Relatórios Nativos na Memória RAM</h2>
-          <p>Precisa apresentar os dados para a diretoria? O sistema clona o DOM do dashboard, aplica CSS focado em impressão, rasteriza os gráficos complexos em Canvas HTML e gera um PDF executivo multipáginas via <code>html2pdf.js</code>. Tudo processado diretamente no navegador do usuário (Client-Side), garantindo segurança absoluta dos dados sensíveis (LGPD), já que nenhum arquivo transita por servidores de terceiros para ser renderizado.</p>
+          <p>O robô varre recursivamente as pastas do Drive e aplica uma tolerância temporal matemática (-12 meses ou +2 meses) para garantir que nenhum paciente oncológico seja perdido no funil de diagnóstico.</p>
         `
       },
       {
         id: 'estudio-pdf',
         title: 'Estúdio PDF Pro',
         subtitle: 'Manipulação segura e IA 100% Client-Side para compliance LGPD.',
-        thumb: 'https://placehold.co/800x500/0f172a/38bdf8?text=Estudio+PDF',
-        heroImg: 'https://placehold.co/1200x600/0f172a/38bdf8?text=Estudio+PDF+Pro',
+        thumb: 'https://github.com/user-attachments/assets/9777f096-09ab-4ddf-ade9-19eb597cfef2',
+        heroImg: 'https://github.com/user-attachments/assets/9777f096-09ab-4ddf-ade9-19eb597cfef2',
         tags: ['LGPD Compliance', 'Client-Side', 'Tesseract OCR'],
         techs: ['pdf-lib', 'pdf.js', 'Tesseract.js', 'SpeechSynthesis API'],
         metrics: ['Zero upload para sites externos', 'Acessibilidade (TTS Integrado)', '15+ Ferramentas de Edição'],
@@ -380,13 +391,95 @@
           <p>Fazer upload de prontuários em sites gratuitos de PDF gerava um risco extremo de quebra de confidencialidade (LGPD).</p>
           
           <h2><i class="fa-solid fa-microchip me-2"></i> Invertendo a Lógica do Servidor</h2>
-          <p>O Estúdio PDF Pro envia o "servidor para o navegador". Usando <code>pdf-lib</code> e <code>pdf.js</code>, os arquivos são juntados, cortados e achatados na memória RAM local do operador.</p>
+          <p>O Estúdio PDF Pro envia o "servidor para o navegador". Usando <code>pdf-lib</code> e <code>pdf.js</code>, os arquivos são juntados, cortados e achatados na memória RAM local do operador. Nada sai do ambiente corporativo.</p>
+
+          <img src="https://github.com/user-attachments/assets/81db6cc4-8816-4b7c-975e-b2d307935387" alt="Ferramentas PDF">
           
           <h2><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Automação e IA Híbrida</h2>
           <ul>
             <li><strong>Leitor Imersivo:</strong> Motor Text-to-Speech nativo com efeito karaokê para audição de PDFs.</li>
-            <li><strong>Faxina e OCR:</strong> Exclusão automática de páginas em branco e leitura de imagens direto do browser.</li>
-            <li><strong>Torre de Controle:</strong> Um dashboard administrativo monitora (via pings) quem está utilizando a ferramenta no hospital em tempo real.</li>
+            <li><strong>Faxina e OCR:</strong> Exclusão automática de páginas em branco e leitura de imagens direto do browser usando Tesseract.</li>
+            <li><strong>Torre de Controle:</strong> Um dashboard administrativo monitora quem está utilizando a ferramenta no hospital em tempo real.</li>
+          </ul>
+
+          <img src="https://github.com/user-attachments/assets/c79423ff-ad13-43fe-a40c-00f37d1afa9a" alt="Torre de Controle">
+        `
+      },
+      {
+        id: 'smart-scheduling',
+        title: 'Smart Scheduling Hub',
+        subtitle: 'Orquestração de Agendamento Cirúrgico no HCPA.',
+        thumb: 'https://github.com/user-attachments/assets/9966c830-c1b0-4632-97a7-1294d62f56e0',
+        heroImg: 'https://github.com/user-attachments/assets/ffb0e43b-d11d-42cc-8626-c9313ba0aecf',
+        tags: ['Frontend Custom', 'RBAC Security', 'WhatsApp API'],
+        techs: ['Google Apps Script', 'JavaScript', 'HTML5/CSS3'],
+        metrics: ['Controle de Concorrência (LockService)', 'Integração Automática com WhatsApp', 'Gestão Visual por Swimlanes'],
+        article: `
+          <h2><i class="fa-solid fa-triangle-exclamation me-2"></i> O Problema: O Caos da Planilha Estática</h2>
+          <p>Antes deste sistema, o agendamento de cirurgias dependia de uma planilha crua e extensa, com baixa usabilidade, alto risco de exclusão acidental e desconectada das comunicações via WhatsApp e anexos médicos.</p>
+          
+          <h2><i class="fa-solid fa-layer-group me-2"></i> A Solução: Arquitetura SPA</h2>
+          <p>Orquestrei um sistema em GAS que atua como Backend/API, servindo uma interface front-end moderna diretamente sobre o Google Sheets.</p>
+          <ul>
+            <li><strong>Front-end Dinâmico:</strong> Transformação de dados em Cards interativos e uma Timeline (Swimlanes) por salas cirúrgicas.</li>
+            <li><strong>Segurança RBAC:</strong> Sistema dinâmico de permissões (Super Admin, Recepção, Leitores) que blinda a edição indevida de dados.</li>
+            <li><strong>WhatsApp Gateway:</strong> Geração de mensagens automatizadas baseadas em templates, calculando horários cirúrgicos.</li>
+          </ul>
+
+          <img src="https://github.com/user-attachments/assets/371d1231-3d16-45e0-a671-669655e9ef55" alt="WhatsApp Gateway e Permissões">
+
+          <h2><i class="fa-solid fa-gauge-high me-2"></i> Performance under the hood</h2>
+          <p>Implementei <code>LockService</code> para gerenciar concorrência (evitando corrupção quando dois usuários editam o mesmo agendamento simultaneamente) e <code>CacheService</code> para otimizar as cotas de leitura da API do Sheets em picos de acesso.</p>
+        `
+      },
+      {
+        id: 'samis-analytics',
+        title: 'SAMIS: Inteligência de Arquivo',
+        subtitle: 'Automação massiva e OCR para arquivos médicos.',
+        thumb: 'https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f',
+        heroImg: 'https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f',
+        tags: ['Analytics', 'Autocomplete VIP', 'OCR API'],
+        techs: ['Google Apps Script', 'Bootstrap 5', 'OCR.space'],
+        metrics: ['+70 Planilhas substituídas', 'OCR Integrado para Data-Entry', 'Geração de Rótulos Automatizada'],
+        article: `
+          <h2><i class="fa-solid fa-triangle-exclamation me-2"></i> O Desafio Operacional</h2>
+          <p>O controle de documentos e prontuários era feito de forma manual, disperso em dezenas de guias. Era impossível extrair métricas cruzadas sem trabalho intensivo, e o lançamento de dados era propenso a falhas humanas.</p>
+          
+          <h2><i class="fa-solid fa-microchip me-2"></i> A Solução</h2>
+          <p>Desenvolvi uma SPA robusta onde os usuários operam sem nunca tocar na planilha base. Os destaques da engenharia incluem:</p>
+          <ul>
+            <li><strong>Integração OCR:</strong> Conexão via API para ler documentos escaneados e preencher formulários de lançamento automaticamente.</li>
+            <li><strong>Autocomplete Inteligente (Algoritmo VIP):</strong> O sistema aprende o histórico de uso e coloca os "Tipos Documentais" mais frequentes no topo das buscas do usuário.</li>
+            <li><strong>Motor de Etiquetas:</strong> Cálculo lógico para impressão automatizada de rótulos de rastreamento com numeração exata de paginação.</li>
+          </ul>
+
+          <h2><i class="fa-solid fa-bolt me-2"></i> UX e Resiliência</h2>
+          <p>O <code>localStorage</code> guarda os rascunhos ativamente para que nenhuma digitação seja perdida em caso de queda de navegador. Navegação otimizada para "data entry" exclusivo via teclado.</p>
+        `
+      },
+      {
+        id: 'smart-requests',
+        title: 'Smart Requests Manager',
+        subtitle: 'Compliance LGPD e liberação automatizada de Prontuários.',
+        thumb: 'https://github.com/user-attachments/assets/d0aff338-e047-4f0f-804f-3c9447cbc145',
+        heroImg: 'https://github.com/user-attachments/assets/c181eac6-1098-4221-878b-ef222dc4e6bb',
+        tags: ['Ticketing', 'Soft-Locking', 'LGPD Compliance'],
+        techs: ['Google Apps Script', 'pdf-lib', 'Gmail API'],
+        metrics: ['Fallback Resiliente de PDFs Corrompidos', 'Fila de E-mails Assíncrona (Cron)', 'Provisionamento de Pastas Seguras'],
+        article: `
+          <h2><i class="fa-solid fa-triangle-exclamation me-2"></i> O Contexto de Risco</h2>
+          <p>A liberação de documentos médicos sofria com concorrência destrutiva entre operadores, gestão manual caótica de conversão de imagens em PDFs e uma forte dificuldade em auditar o bloqueio de dados quando solicitados por terceiros.</p>
+          
+          <h2><i class="fa-solid fa-shield-halved me-2"></i> Arquitetura de Compliance LGPD</h2>
+          <p>Se a solicitação é feita pelo próprio paciente, o acesso à nuvem é liberado. Caso seja por <strong>terceiros</strong>, a pasta de Drive nasce TRANCADA. A interface bloqueia o disparo do e-mail até o operador validar fisicamente documentos como procuração ou RGs inseridos na subpasta "Docs".</p>
+          
+          <img src="https://github.com/user-attachments/assets/7a5f76f0-081d-406b-bf17-711763d4e7ef" alt="Controle de UI e Filas">
+
+          <h2><i class="fa-solid fa-gears me-2"></i> Engenharia Resiliente</h2>
+          <ul>
+            <li><strong>Motor de Fallback de PDF:</strong> Quando as impressoras hospitalares geram PDFs fora do padrão que quebram a conversão padrão, o sistema aciona o \`pdf.js\`, rasteriza o PDF corrompido em um \`<canvas>\` oculto e reconstrói o arquivo blindado.</li>
+            <li><strong>Soft-Locking:</strong> Time-To-Live (TTL) de 15 minutos aplicado nas linhas, impedindo que dois funcionários atendam e editem o mesmo requerimento simultaneamente.</li>
+            <li><strong>Fila Assíncrona via Cron:</strong> Disparos massivos de e-mails pesados não travam a UI. Eles são despachados para uma "Planilha-Robô" que os envia em background.</li>
           </ul>
         `
       }
@@ -437,8 +530,10 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Inicializa a Grid
-    renderGrid();
+    // Inicializa a Grid após o carregamento total para evitar que não encontre o DOM
+    document.addEventListener("DOMContentLoaded", () => {
+      renderGrid();
+    });
   </script>
 </body>
 </html>
