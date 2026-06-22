@@ -134,11 +134,12 @@
     .project-content { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; }
     @media (max-width: 900px) { .project-content { grid-template-columns: 1fr; } }
 
-    .article h2 { font-size: 2rem; color: var(--accent-1); margin-bottom: 20px; margin-top: 40px; font-weight: 800; }
+    .article h2 { font-size: 1.8rem; color: var(--accent-1); margin-bottom: 20px; margin-top: 40px; font-weight: 800; display: flex; align-items: center; }
     .article h2:first-child { margin-top: 0; }
     .article p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.8; }
     .article ul { margin-bottom: 20px; padding-left: 20px; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; }
     .article li { margin-bottom: 10px; }
+    .article blockquote { font-size: 1.2rem; font-style: italic; border-left: 4px solid var(--accent-1); padding-left: 15px; margin: 30px 0; color: var(--text-main); }
     .article img { width: 100%; border-radius: 12px; border: 1px solid var(--border); margin: 20px 0; box-shadow: var(--shadow); }
 
     .sidebar-project { background: var(--bg-card); padding: 30px; border-radius: 20px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 100px; }
@@ -223,7 +224,6 @@
     const body = document.body;
     const themeIcon = document.getElementById('theme-icon');
     
-    // Verifica preferência salva
     if (localStorage.getItem('theme') === 'light') {
       body.classList.add('light-mode');
       themeIcon.classList.replace('fa-moon', 'fa-sun');
@@ -237,24 +237,23 @@
     }
 
     // === 2. BANCO DE DADOS DOS PROJETOS ===
-    // Aqui você adiciona as URLs das imagens que subiu para o GitHub
     const projetos = [
       {
         id: 'moogia',
         title: 'MoogIA: EdTech Gamificada',
         subtitle: 'Plataforma de estudos com IA Generativa, Flashcards e Gamificação estilo Duolingo.',
-        thumb: 'https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db', // Substitua pelo link real do thumbnail
-        heroImg: 'https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db', // Imagem gigante para a página do projeto
+        thumb: 'https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db',
+        heroImg: 'https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db',
         tags: ['SaaS', 'Google Gemini', 'Gamification'],
         techs: ['Vanilla JS', 'Google Apps Script', 'Mermaid.js', 'Bootstrap 5'],
         metrics: ['Arquitetura 100% Serverless', 'Custo zero de Cloud Inicial', 'Processamento de Edital em Segundos'],
         article: `
-          <h2>O Desafio: Estudo Passivo</h2>
+          <h2><i class="fa-solid fa-triangle-exclamation me-2"></i> O Desafio: Estudo Passivo</h2>
           <p>Estudantes de alta performance gastam fortunas em plataformas fragmentadas e sofrem com a fadiga da leitura passiva de PDFs. Era necessário centralizar o ecossistema e aplicar métodos neurocientíficos (repetição ativa) de forma automatizada.</p>
           
           <img src="https://github.com/user-attachments/assets/2f90fbc6-47a6-4715-85bc-74f7af388cea" alt="Dashboard MoogIA">
 
-          <h2>A Arquitetura da Solução</h2>
+          <h2><i class="fa-solid fa-sitemap me-2"></i> A Arquitetura da Solução</h2>
           <p>Criei o MoogIA como uma SPA rodando inteiramente sobre o Google Workspace. O sistema utiliza a API do Google Gemini conectada diretamente à "Mesa de Estudos" do usuário.</p>
           <ul>
             <li><strong>Smart Parsing de Editais:</strong> Upload de um edital em PDF gera uma Jornada de Estudos em JSON automaticamente.</li>
@@ -264,7 +263,7 @@
 
           <img src="https://github.com/user-attachments/assets/a372fda2-880c-40a8-8bff-e5cad160f6f8" alt="Copiloto MoogIA">
 
-          <h2>Monetização e Escala</h2>
+          <h2><i class="fa-solid fa-chart-line me-2"></i> Monetização e Escala</h2>
           <p>Preparado para um modelo SaaS Freemium, onde o processamento de arquivos pesados ocorre na RAM do usuário (Client-Side), poupando custos de servidor e focando os gastos apenas nas requisições de tokens de Inteligência Artificial.</p>
         `
       },
@@ -273,7 +272,7 @@
         title: 'RHC Pro v2: Clinical Data Hub',
         subtitle: 'Governança de Dados, Auditoria Automatizada e Business Intelligence Oncológico Serverless.',
         thumb: 'https://github.com/user-attachments/assets/image_2b8a62.png',
-        heroImg: 'https://github.com/user-attachments/assets/image_2b8a62.png',
+        heroImg: 'https://github.com/user-attachments/assets/56db6501-bd91-4eaa-8d17-578bdc8421a2.png',
         tags: ['Business Intelligence', 'Data Mining', 'Library/Shell', 'SaaS Interno'],
         techs: ['Google Apps Script', 'Vanilla JS', 'Chart.js', 'html2pdf.js'],
         metrics: ['Zero Custo de Infraestrutura', 'Filtros de BI em Milissegundos', 'Auditoria Temporal Dinâmica (-12/+2)'],
@@ -287,8 +286,8 @@
           <h2><i class="fa-solid fa-sitemap me-2"></i> A Virada Arquitetônica: Padrão Library/Shell</h2>
           <p>Para escalar o sistema com custo zero de infraestrutura e facilitar manutenções futuras, implementei uma arquitetura de microsserviços nativa no Google Workspace conhecida como <strong>Library/Shell</strong>.</p>
           <ul>
-            <li><strong>O Motor (Core):</strong> Toda a lógica pesada, algoritmos de mineração e interfaces visuais residem em um repositório centralizado e oculto.</li>
-            <li><strong>As Cascas (Shells):</strong> As planilhas operacionais funcionam apenas como "terminais burros". Se uma regra clínica muda, eu atualizo o <em>Core</em> e a alteração reflete instantaneamente em todo o hospital, sem risco de quebra de versão.</li>
+            <li><strong>O Motor (Core):</strong> Toda a lógica pesada, algoritmos de mineração e interfaces visuais residem em um repositório centralizado e oculto. O script de integração categoriza dinamicamente os setores de atendimento, identificando com precisão contextos operacionais como <strong>BLOCO, CCA ou HEMODINÂMICA</strong> para aplicar regras específicas e rotear os dados corretamente.</li>
+            <li><strong>As Cascas (Shells):</strong> As planilhas operacionais funcionam apenas como "terminais burros". Se uma regra clínica muda, a atualização no <em>Core</em> reflete instantaneamente em todo o hospital, sem risco de quebra de versão.</li>
           </ul>
 
           <img src="https://github.com/user-attachments/assets/image_2b8a23.jpg" alt="Gestor RHC e Workflow Guiado">
@@ -300,7 +299,7 @@
           <h2><i class="fa-solid fa-clock-rotate-left me-2"></i> Auditoria Contínua: A "Máquina do Tempo"</h2>
           <p>Para garantir a conformidade e que nenhum paciente fosse perdido no funil de diagnóstico, programei um algoritmo de auditoria cruzada. O robô varre recursivamente as pastas do Drive e aplica uma tolerância temporal matemática: ele busca pacientes faltantes justificando-os caso tenham sido tratados no passado (-12 meses) ou lançados no futuro (+2 meses). As perdas reais são isoladas para ação de <em>compliance</em> imediata.</p>
 
-          <blockquote style="font-size: 1.2rem; font-style: italic; border-left: 4px solid var(--accent-1); padding-left: 15px; margin: 30px 0; color: var(--text-main);">
+          <blockquote>
             "Transformamos um processo de conferência manual que levava dias em um cruzamento de dados com apenas um clique de 3 segundos."
           </blockquote>
 
@@ -312,19 +311,19 @@
         id: 'estudio-pdf',
         title: 'Estúdio PDF Pro',
         subtitle: 'Manipulação segura e IA 100% Client-Side para compliance LGPD.',
-        thumb: 'https://placehold.co/800x500/0f172a/38bdf8?text=Estudio+PDF', // Adicione sua imagem aqui
+        thumb: 'https://placehold.co/800x500/0f172a/38bdf8?text=Estudio+PDF',
         heroImg: 'https://placehold.co/1200x600/0f172a/38bdf8?text=Estudio+PDF+Pro',
         tags: ['LGPD Compliance', 'Client-Side', 'Tesseract OCR'],
         techs: ['pdf-lib', 'pdf.js', 'Tesseract.js', 'SpeechSynthesis API'],
         metrics: ['Zero upload para sites externos', 'Acessibilidade (TTS Integrado)', '15+ Ferramentas de Edição'],
         article: `
-          <h2>O Risco do Uso de Ferramentas Terceirizadas</h2>
+          <h2><i class="fa-solid fa-shield-halved me-2"></i> O Risco do Uso de Ferramentas Terceirizadas</h2>
           <p>Fazer upload de prontuários em sites gratuitos de PDF gerava um risco extremo de quebra de confidencialidade (LGPD).</p>
           
-          <h2>Invertendo a Lógica do Servidor</h2>
+          <h2><i class="fa-solid fa-microchip me-2"></i> Invertendo a Lógica do Servidor</h2>
           <p>O Estúdio PDF Pro envia o "servidor para o navegador". Usando <code>pdf-lib</code> e <code>pdf.js</code>, os arquivos são juntados, cortados e achatados na memória RAM local do operador.</p>
           
-          <h2>Automação e IA Híbrida</h2>
+          <h2><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Automação e IA Híbrida</h2>
           <ul>
             <li><strong>Leitor Imersivo:</strong> Motor Text-to-Speech nativo com efeito karaokê para audição de PDFs.</li>
             <li><strong>Faxina e OCR:</strong> Exclusão automática de páginas em branco e leitura de imagens direto do browser.</li>
@@ -332,7 +331,6 @@
           </ul>
         `
       }
-      // Adicione os outros projetos (Gestor de Requerimentos, SAMIS, Convênios) seguindo este padrão
     ];
 
     // === 3. RENDERIZAÇÃO INICIAL (CARDS) ===
@@ -349,7 +347,7 @@
             <h3>${p.title}</h3>
             <p>${p.subtitle}</p>
             <div class="tags">${tagsHtml}</div>
-            <div class="card-link">Ler Estudo de Caso <i class="fa-solid fa-arrow-right"></i></div>
+            <div class="card-link">Ler Estudo de Caso <i class="fa-solid fa-arrow-right ms-2"></i></div>
           </div>
         `;
       });
