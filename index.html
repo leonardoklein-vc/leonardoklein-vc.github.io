@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfólio de Leonardo Klein Rocha — Arquitetura de Soluções, IA e aplicações serverless no Google Workspace." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de Leonardo Klein Rocha — arquitetura de soluções, IA e aplicações serverless no Google Workspace.">
   <title>LéuKlein | Arquitetura de Soluções</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,781 +12,1164 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    :root {
-      --bg: #07101f;
-      --bg-2: #0a1730;
-      --surface: rgba(12, 27, 53, .72);
-      --surface-solid: #0d1e3b;
-      --text: #f3f7ff;
-      --muted: #a6b4cf;
-      --line: rgba(178, 202, 255, .16);
-      --cyan: #33c6ff;
-      --blue: #4c7dff;
-      --purple: #8b5cf6;
-      --green: #22c58b;
-      --orange: #ff9b42;
-      --pink: #ff5f9d;
-      --shadow: 0 20px 55px rgba(0,0,0,.34);
-      --grid: rgba(104, 156, 255, .10);
-      --nav: rgba(5, 14, 29, .72);
+
+    :root{
+
+      --bg:#eff5ff;
+--bg2:#e5efff;
+--surface:rgba(255,255,255,.80);
+--surface-solid:#ffffff;
+
+      --text:#10203e;
+--muted:#536783;
+--line:rgba(35,72,125,.16);
+
+      --cyan:#0879e9;
+--blue:#315ae8;
+--purple:#6c37da;
+--green:#0a9e6c;
+--orange:#d46a05;
+--pink:#d52e73;
+
+      --nav:rgba(249,252,255,.78);
+--shadow:0 18px 45px rgba(35,68,125,.14);
+--grid:rgba(43,94,174,.09);
+
     }
 
-    body.light-mode {
-      --bg: #eff5ff;
-      --bg-2: #e2ecff;
-      --surface: rgba(255,255,255,.78);
-      --surface-solid: #ffffff;
-      --text: #10203d;
-      --muted: #526681;
-      --line: rgba(39, 72, 122, .16);
-      --cyan: #0878e8;
-      --blue: #3159e8;
-      --purple: #6d38da;
-      --green: #0a9d6c;
-      --orange: #d66a05;
-      --pink: #d72d72;
-      --shadow: 0 18px 45px rgba(35, 68, 125, .14);
-      --grid: rgba(43, 94, 174, .09);
-      --nav: rgba(248, 251, 255, .75);
+    body.dark-mode{
+
+      --bg:#07101f;
+--bg2:#0b1934;
+--surface:rgba(12,29,58,.72);
+--surface-solid:#0d1f3f;
+
+      --text:#f4f8ff;
+--muted:#a6b7d2;
+--line:rgba(181,209,255,.16);
+
+      --cyan:#36c9ff;
+--blue:#4d7dff;
+--purple:#8a5cf6;
+--green:#21c58b;
+--orange:#ff9b45;
+--pink:#ff5f9e;
+
+      --nav:rgba(5,14,29,.76);
+--shadow:0 22px 58px rgba(0,0,0,.35);
+--grid:rgba(104,156,255,.09);
+
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *{
+box-sizing:border-box}
+html{
+scroll-behavior:smooth}
+body{
+margin:0;
+min-width:320px;
+color:var(--text);
+font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+background:
+      radial-gradient(circle at 8% 10%,rgba(41,157,255,.16),transparent 28rem),
+      radial-gradient(circle at 93% 14%,rgba(139,92,246,.17),transparent 30rem),
+      linear-gradient(135deg,var(--bg),var(--bg2));
+overflow-x:hidden;
+transition:.35s ease}
+
+    body:before{
+content:"";
+position:fixed;
+inset:0;
+z-index:-3;
+pointer-events:none;
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+background-size:52px 52px;
+mask-image:linear-gradient(to bottom,black,transparent 84%)}
+
+    #particle-canvas{
+position:fixed;
+inset:0;
+z-index:-2;
+width:100%;
+height:100%;
+pointer-events:none;
+opacity:.76}
+
+    .container{
+width:min(1180px,calc(100% - 40px));
+margin:auto}
+.muted{
+color:var(--muted)}
+
+    nav{
+position:fixed;
+inset:0 0 auto;
+z-index:1000;
+border-bottom:1px solid var(--line);
+background:var(--nav);
+backdrop-filter:blur(18px)}
+
+    .nav-content{
+height:74px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px}
+
+    .brand{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:900;
+font-size:1.2rem;
+letter-spacing:-.7px;
+text-decoration:none}
+
+    .brand-mark{
+width:35px;
+height:35px;
+border-radius:11px;
+display:grid;
+place-items:center;
+color:white;
+background:linear-gradient(135deg,var(--cyan),var(--purple));
+box-shadow:0 8px 20px rgba(60,130,255,.25)}
+
+    .brand span{
+color:var(--cyan)}
+.nav-links{
+display:flex;
+gap:22px;
+align-items:center}
+.nav-links a{
+color:var(--muted);
+text-decoration:none;
+font-size:.85rem;
+font-weight:800}
+.nav-links a:hover{
+color:var(--cyan)}
+
+    .icon-btn{
+width:38px;
+height:38px;
+border-radius:12px;
+border:1px solid var(--line);
+display:grid;
+place-items:center;
+cursor:pointer;
+color:var(--text);
+background:var(--surface);
+transition:.25s}
+.icon-btn:hover{
+transform:translateY(-2px);
+border-color:var(--cyan)}
+
+    .hero{
+min-height:100vh;
+display:grid;
+align-items:center;
+padding:122px 0 74px}
+.hero-grid{
+display:grid;
+grid-template-columns:1.04fr .96fr;
+gap:46px;
+align-items:center}
+
+    .eyebrow{
+display:inline-flex;
+align-items:center;
+gap:9px;
+padding:8px 13px;
+border-radius:999px;
+border:1px solid rgba(63,194,255,.34);
+background:rgba(40,160,255,.10);
+color:var(--cyan);
+font:500 .72rem "DM Mono",monospace;
+letter-spacing:.08em;
+text-transform:uppercase}
+
+    .pulse{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--green);
+box-shadow:0 0 0 0 rgba(34,197,139,.7);
+animation:pulse 1.8s infinite}
+@keyframes pulse{
+70%{
+box-shadow:0 0 0 9px rgba(34,197,139,0)}
+100%{
+box-shadow:0 0 0 0 rgba(34,197,139,0)}
+}
+
+    .hero h1{
+max-width:750px;
+margin:21px 0 18px;
+font-size:clamp(2.75rem,5vw,5.15rem);
+line-height:.99;
+letter-spacing:-3px;
+font-weight:900}
+.gradient{
+background:linear-gradient(100deg,var(--cyan),#6ca2ff 48%,var(--purple));
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent}
+
+    .hero p{
+max-width:625px;
+margin:0 0 29px;
+color:var(--muted);
+font-size:1.07rem;
+line-height:1.85}
+.actions{
+display:flex;
+gap:12px;
+flex-wrap:wrap}
+.btn{
+border:0;
+text-decoration:none;
+cursor:pointer;
+border-radius:13px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+padding:14px 20px;
+font-weight:900;
+font-size:.92rem;
+transition:.25s}
+
+    .btn-primary{
+color:#fff;
+background:linear-gradient(135deg,var(--cyan),var(--purple));
+box-shadow:0 12px 25px rgba(64,124,255,.22)}
+.btn-primary:hover{
+transform:translateY(-3px);
+box-shadow:0 19px 33px rgba(64,124,255,.35)}
+.btn-soft{
+color:var(--text);
+border:1px solid var(--line);
+background:var(--surface)}
+.btn-soft:hover{
+transform:translateY(-3px);
+border-color:var(--cyan)}
+
+    .hero-stats{
+display:flex;
+gap:13px;
+margin-top:39px;
+flex-wrap:wrap}
+.hero-stat{
+border-left:2px solid var(--cyan);
+padding-left:11px}
+.hero-stat strong{
+display:block;
+font-size:1rem}
+.hero-stat span{
+font-size:.73rem;
+color:var(--muted);
+font-weight:700}
+
+    .hero-visual{
+position:relative;
+min-height:460px;
+perspective:1400px}
+.core-glow{
+position:absolute;
+width:245px;
+height:245px;
+border-radius:50%;
+top:102px;
+left:50%;
+transform:translateX(-50%);
+background:radial-gradient(circle,rgba(49,198,255,.38),rgba(99,101,255,.12) 42%,transparent 70%);
+filter:blur(4px);
+animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{
+50%{
+transform:translateX(-50%) scale(1.17);
+opacity:.7}
+}
+
+    .orbit{
+position:absolute;
+border:1px dashed rgba(90,184,255,.24);
+border-radius:50%;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+animation:spin 18s linear infinite}
+.orbit.one{
+width:435px;
+height:435px}
+.orbit.two{
+width:350px;
+height:350px;
+animation-direction:reverse;
+animation-duration:14s}
+.orbit:after{
+content:"";
+position:absolute;
+width:9px;
+height:9px;
+border-radius:50%;
+background:var(--cyan);
+box-shadow:0 0 17px var(--cyan);
+top:5%;
+left:18%}
+.orbit.two:after{
+background:var(--purple);
+box-shadow:0 0 17px var(--purple);
+left:auto;
+right:15%;
+top:auto;
+bottom:5%}
+@keyframes spin{
+to{
+transform:translate(-50%,-50%) rotate(360deg)}
+}
+
+    .dash{
+position:absolute;
+inset:48px 7% 30px 5%;
+overflow:hidden;
+border-radius:23px;
+border:1px solid rgba(139,185,255,.35);
+background:linear-gradient(145deg,#f8fbff,#e9f1ff);
+box-shadow:var(--shadow),0 0 70px rgba(49,134,255,.15);
+transform:rotateY(-8deg) rotateX(4deg);
+animation:dashFloat 7s ease-in-out infinite}
+body.dark-mode .dash{
+background:linear-gradient(145deg,rgba(16,39,82,.96),rgba(7,20,47,.93))}
+@keyframes dashFloat{
+50%{
+transform:rotateY(-4deg) rotateX(1deg) translateY(-12px)}
+}
+
+    .dash-head{
+height:57px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 19px;
+border-bottom:1px solid var(--line)}
+.dash-brand{
+font-weight:900;
+font-size:.85rem}
+.dash-brand b{
+color:var(--cyan)}
+.lights{
+display:flex;
+gap:6px}
+.lights i{
+width:8px;
+height:8px;
+border-radius:50%;
+display:block;
+background:#ff6d7a}
+.lights i:nth-child(2){
+background:#ffd066}
+.lights i:nth-child(3){
+background:#25ca96}
+
+    .dash-main{
+display:grid;
+grid-template-columns:120px 1fr;
+min-height:322px}
+.dash-side{
+padding:17px 12px;
+border-right:1px solid var(--line)}
+.dash-link{
+height:25px;
+border-radius:7px;
+margin-bottom:11px;
+background:rgba(128,162,230,.14)}
+.dash-link.active{
+background:linear-gradient(90deg,rgba(45,198,255,.53),rgba(86,90,255,.28))}
+.dash-content{
+padding:18px}
+.dash-title{
+width:53%;
+height:15px;
+border-radius:8px;
+background:linear-gradient(90deg,var(--cyan),var(--purple));
+margin-bottom:18px}
+.dash-cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px}
+.metric{
+height:63px;
+border:1px solid var(--line);
+background:rgba(255,255,255,.045);
+border-radius:11px;
+padding:10px}
+.metric small{
+color:var(--muted);
+display:block;
+font-size:.54rem;
+font-weight:800}
+.metric b{
+display:block;
+margin-top:5px;
+font-size:.94rem}
+.metric:nth-child(1)b{
+color:var(--cyan)}
+.metric:nth-child(2)b{
+color:var(--orange)}
+.metric:nth-child(3)b{
+color:var(--green)}
+
+    .chart{
+margin-top:13px;
+height:126px;
+border:1px solid var(--line);
+border-radius:12px;
+position:relative;
+overflow:hidden;
+background:repeating-linear-gradient(to bottom,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 25px,var(--line) 26px)}
+.chart svg{
+position:absolute;
+inset:17px;
+width:calc(100% - 34px);
+height:calc(100% - 34px)}
+.chart path{
+fill:none;
+stroke-linecap:round;
+stroke-linejoin:round;
+stroke-width:3}
+.line1{
+stroke:var(--cyan)}
+.line2{
+stroke:var(--purple)}
+
+    .chip{
+position:absolute;
+z-index:3;
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 12px;
+border:1px solid var(--line);
+border-radius:13px;
+background:rgba(255,255,255,.82);
+backdrop-filter:blur(15px);
+box-shadow:var(--shadow);
+font-size:.73rem;
+font-weight:900;
+animation:floatChip 4s ease-in-out infinite alternate}
+body.dark-mode .chip{
+background:rgba(7,20,44,.78)}
+.chip i{
+font-size:1.05rem;
+color:var(--cyan)}
+.chip-a{
+right:0;
+top:9%}
+.chip-b{
+left:-2%;
+bottom:8%;
+animation-delay:-1.8s}
+.chip-b i{
+color:var(--purple)}
+.chip-c{
+right:3%;
+bottom:2%;
+animation-delay:-.8s}
+.chip-c i{
+color:var(--green)}
+@keyframes floatChip{
+to{
+transform:translateY(-14px)}
+}
+
+    section{
+scroll-margin-top:88px}
+.section{
+padding:82px 0 30px}
+.section-top{
+display:flex;
+align-items:end;
+justify-content:space-between;
+gap:20px;
+margin-bottom:32px}
+.kicker{
+color:var(--cyan);
+font:500 .75rem "DM Mono",monospace;
+letter-spacing:.1em;
+text-transform:uppercase}
+.section-title{
+margin:8px 0 0;
+font-size:clamp(2rem,3.5vw,3.1rem);
+line-height:1.04;
+letter-spacing:-1.7px}
+.section-copy{
+max-width:410px;
+color:var(--muted);
+font-size:.92rem;
+line-height:1.75}
+
+    .about-grid{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:20px}
+.about-main,.about-side,.timeline-card{
+border:1px solid var(--line);
+background:var(--surface);
+border-radius:20px;
+box-shadow:var(--shadow)}
+.about-main{
+padding:29px}
+.about-main h3{
+font-size:1.42rem;
+margin:0 0 14px;
+letter-spacing:-.5px}
+.about-main p{
+color:var(--muted);
+line-height:1.8;
+font-size:.96rem}
+.about-main p+p{
+margin-top:13px}
+.about-side{
+padding:23px;
+display:grid;
+gap:15px}
+.about-fact{
+display:flex;
+gap:12px;
+align-items:flex-start}
+.about-fact i{
+width:34px;
+height:34px;
+border-radius:11px;
+display:grid;
+place-items:center;
+color:var(--cyan);
+background:rgba(48,196,255,.1)}
+.about-fact strong{
+display:block;
+font-size:.84rem}
+.about-fact span{
+display:block;
+color:var(--muted);
+font-size:.77rem;
+line-height:1.55;
+margin-top:2px}
+
+    .focus-row{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:20px}
+.focus{
+padding:15px;
+border:1px solid var(--line);
+border-radius:15px;
+background:var(--surface)}
+.focus i{
+color:var(--cyan);
+font-size:1.05rem}
+.focus b{
+display:block;
+margin-top:8px;
+font-size:.83rem}
+.focus span{
+display:block;
+color:var(--muted);
+font-size:.72rem;
+line-height:1.5;
+margin-top:3px}
+
+    .project-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:20px}
+.project{
+position:relative;
+overflow:hidden;
+border:1px solid var(--line);
+border-radius:20px;
+min-height:395px;
+background:var(--surface);
+box-shadow:var(--shadow);
+cursor:pointer;
+transition:.35s;
+display:flex;
+flex-direction:column}
+.project:hover{
+transform:translateY(-9px);
+border-color:rgba(74,204,255,.68);
+box-shadow:0 28px 55px rgba(0,0,0,.35)}
+.art{
+height:167px;
+position:relative;
+overflow:hidden;
+background:#0b1c3e;
+border-bottom:1px solid var(--line)}
+.art img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+opacity:.86;
+transition:.5s}
+.project:hover .art img{
+transform:scale(1.07);
+opacity:1}
+.art:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,transparent 25%,rgba(6,17,38,.82));
+pointer-events:none}
+.fallback{
+position:absolute;
+inset:0;
+display:grid;
+place-items:center;
+font-size:4rem;
+color:rgba(255,255,255,.75);
+background:linear-gradient(135deg,var(--accentA),var(--accentB))}
+.picon{
+position:absolute;
+z-index:2;
+top:14px;
+left:14px;
+width:40px;
+height:40px;
+border-radius:12px;
+display:grid;
+place-items:center;
+color:#fff;
+background:linear-gradient(135deg,var(--accentA),var(--accentB));
+box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.project-body{
+padding:19px;
+display:flex;
+flex-direction:column;
+flex:1}
+.project h3{
+margin:0 0 9px;
+font-size:1.12rem;
+letter-spacing:-.5px;
+line-height:1.22}
+.project p{
+margin:0 0 16px;
+color:var(--muted);
+font-size:.83rem;
+line-height:1.66;
+flex:1}
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+margin-bottom:16px}
+.tag{
+border:1px solid var(--line);
+background:rgba(255,255,255,.035);
+padding:5px 8px;
+border-radius:999px;
+color:var(--muted);
+font-size:.61rem;
+font-weight:800;
+letter-spacing:.03em;
+text-transform:uppercase}
+.card-link{
+color:var(--cyan);
+font-size:.78rem;
+font-weight:900;
+display:flex;
+align-items:center;
+gap:8px}
+
+    #project-view{
+display:none;
+padding:112px 0 72px;
+min-height:100vh}
+.back{
+border:1px solid var(--line);
+background:var(--surface);
+color:var(--text);
+border-radius:999px;
+padding:10px 14px;
+cursor:pointer;
+font-weight:800;
+font-size:.78rem;
+transition:.25s}
+.back:hover{
+border-color:var(--cyan);
+transform:translateX(-3px)}
+.project-head{
+text-align:center;
+margin:38px auto 32px;
+max-width:950px}
+.project-head h1{
+margin:13px 0;
+font-size:clamp(2.2rem,4.4vw,4.35rem);
+line-height:1;
+letter-spacing:-2.3px}
+.project-head p{
+margin:0 auto;
+max-width:775px;
+color:var(--muted);
+line-height:1.8;
+font-size:1.04rem}
+.cover{
+width:100%;
+height:min(48vw,570px);
+min-height:280px;
+object-fit:cover;
+border:1px solid var(--line);
+border-radius:22px;
+box-shadow:var(--shadow);
+background:var(--surface-solid)}
+.project-content{
+display:grid;
+grid-template-columns:minmax(0,1fr) 285px;
+gap:35px;
+margin-top:42px;
+align-items:start}
+.article h2{
+font-size:1.45rem;
+margin:38px 0 14px;
+color:var(--cyan);
+letter-spacing:-.5px}
+.article h2:first-child{
+margin-top:0}
+.article p,.article li{
+color:var(--muted);
+line-height:1.85;
+font-size:.97rem}
+.article ul{
+padding-left:21px}
+.article li{
+margin:9px 0}
+.article strong{
+color:var(--text)}
+.article code{
+color:#b8ecff;
+background:rgba(48,196,255,.12);
+padding:2px 5px;
+border-radius:5px;
+font-family:"DM Mono",monospace;
+font-size:.84em}
+.article img{
+width:100%;
+margin:20px 0;
+border-radius:14px;
+border:1px solid var(--line);
+box-shadow:var(--shadow)}
+.article blockquote{
+margin:27px 0;
+padding:18px 20px;
+border-left:3px solid var(--cyan);
+background:rgba(35,181,255,.07);
+border-radius:0 14px 14px 0;
+color:var(--text);
+font-weight:700;
+line-height:1.7}
+.aside{
+position:sticky;
+top:95px;
+padding:20px;
+border:1px solid var(--line);
+background:var(--surface);
+border-radius:18px}
+.aside h3{
+font-size:.9rem;
+margin:0 0 12px}
+.aside h3:not(:first-child){
+margin-top:23px}
+.metrics{
+list-style:none;
+margin:0;
+padding:0}
+.metrics li{
+display:flex;
+gap:9px;
+align-items:flex-start;
+color:var(--muted);
+font-size:.8rem;
+line-height:1.5;
+margin:10px 0}
+.metrics i{
+margin-top:3px;
+color:var(--green)}
+
+    footer{
+border-top:1px solid var(--line);
+margin-top:65px;
+padding:29px 0;
+color:var(--muted);
+font-size:.8rem}
+.footer-row{
+display:flex;
+justify-content:space-between;
+gap:16px;
+flex-wrap:wrap}
+.footer-row strong{
+color:var(--text)}
+
+    @media(max-width:1010px){
+.hero-grid{
+grid-template-columns:1fr}
+.hero-content{
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center}
+.hero-stats{
+justify-content:center}
+.hero-visual{
+width:min(660px,100%);
+margin:auto}
+.project-grid{
+grid-template-columns:repeat(2,minmax(0,1fr))}
+.section-top{
+align-items:start;
+flex-direction:column}
+.about-grid{
+grid-template-columns:1fr}
+.focus-row{
+grid-template-columns:repeat(2,1fr)}
+}
+
+    @media(max-width:720px){
+.nav-links a:not(.github){
+display:none}
+.nav-content{
+height:66px}
+.hero{
+padding-top:96px}
+.hero h1{
+letter-spacing:-2px}
+.hero-visual{
+min-height:365px;
+transform:scale(.88);
+transform-origin:top center;
+margin-bottom:-35px}
+.chip-b{
+left:0}
+.chip-a{
+right:0}
+.orbit.one{
+width:360px;
+height:360px}
+.orbit.two{
+width:285px;
+height:285px}
+.project-grid{
+grid-template-columns:1fr}
+.project-content{
+grid-template-columns:1fr}
+.aside{
+position:static}
+.cover{
+height:260px}
+.focus-row{
+grid-template-columns:1fr}
+}
+
+
+    /* Camadas de acabamento final: tema claro padrão, acessibilidade e leitura. */
     body {
-      margin: 0;
-      min-width: 320px;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 8% 10%, rgba(41, 157, 255, .17), transparent 28rem),
-        radial-gradient(circle at 92% 16%, rgba(139, 92, 246, .17), transparent 28rem),
-        linear-gradient(135deg, var(--bg), var(--bg-2));
-      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-      overflow-x: hidden;
-      transition: background .35s ease, color .35s ease;
+ color-scheme: light;
+ }
+
+    body.dark-mode {
+ color-scheme: dark;
+ }
+
+    :focus-visible {
+ outline: 3px solid color-mix(in srgb, var(--cyan) 55%, transparent);
+ outline-offset: 3px;
+ }
+
+    .project:focus-within, .project:hover {
+ will-change: transform;
+ }
+
+    .article h2 i {
+ margin-right: 9px;
+ font-size: .92em;
+ }
+
+    .project-cover {
+ object-position: center;
+ }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *, *::before, *::after {
+ animation-duration: .01ms !important;
+ animation-iteration-count: 1 !important;
+ scroll-behavior: auto !important;
+ }
+
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background-image:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, black, transparent 82%);
-    }
 
-    #particle-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: .72;
-    }
 
-    a { color: inherit; }
-    .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 1000;
-      border-bottom: 1px solid var(--line);
-      background: var(--nav);
-      backdrop-filter: blur(18px);
-    }
-    .nav-content {
-      height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .brand {
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 1.2rem;
-      letter-spacing: -.7px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .brand-mark {
-      width: 35px; height: 35px; border-radius: 11px;
-      display: grid; place-items: center;
-      color: white;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      box-shadow: 0 8px 20px rgba(60, 130, 255, .25);
-    }
-    .brand span { color: var(--cyan); }
-    .nav-links { display:flex; align-items:center; gap: 22px; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-weight: 800;
-      font-size: .86rem;
-      transition: color .25s ease;
-    }
-    .nav-links a:hover { color: var(--cyan); }
-    .icon-button {
-      width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--line);
-      display: grid; place-items: center; cursor: pointer;
-      color: var(--text); background: var(--surface);
-      transition: .25s ease;
-    }
-    .icon-button:hover { transform: translateY(-2px); border-color: var(--cyan); }
-
-    /* HERO */
-    .hero { min-height: 100vh; display: grid; align-items:center; padding: 122px 0 72px; }
-    .hero-grid { display:grid; grid-template-columns: 1.03fr .97fr; gap: 46px; align-items:center; }
-    .eyebrow {
-      display: inline-flex; align-items:center; gap: 9px;
-      padding: 8px 13px; border-radius: 999px;
-      border: 1px solid rgba(63, 194, 255, .34);
-      background: rgba(40, 160, 255, .10);
-      color: var(--cyan); font-family:"DM Mono", monospace;
-      font-size: .72rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase;
-    }
-    .pulse { width:8px; height:8px; background:var(--green); border-radius:50%; box-shadow:0 0 0 0 rgba(34,197,139,.7); animation:pulse 1.8s infinite; }
-    @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(34,197,139,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,139,0); } }
-
-    .hero h1 {
-      max-width: 735px; margin: 21px 0 18px;
-      font-size: clamp(2.75rem, 5vw, 5.15rem);
-      line-height: .99; letter-spacing: -3px; font-weight: 900;
-    }
-    .gradient {
-      background: linear-gradient(100deg, var(--cyan), #6ca2ff 48%, var(--purple));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .hero p { max-width: 625px; margin: 0 0 29px; color:var(--muted); font-size:1.07rem; line-height:1.85; }
-    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
-    .btn {
-      border:0; text-decoration:none; cursor:pointer; border-radius:13px;
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding: 14px 20px; font-weight:900; font-size:.92rem; transition:.25s ease;
-    }
-    .btn-primary { color:#fff; background:linear-gradient(135deg, var(--cyan), var(--purple)); box-shadow:0 12px 25px rgba(64,124,255,.22); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow:0 19px 33px rgba(64,124,255,.35); }
-    .btn-secondary { color:var(--text); border:1px solid var(--line); background:var(--surface); }
-    .btn-secondary:hover { transform:translateY(-3px); border-color:var(--cyan); }
-
-    .hero-mini-stats { display:flex; gap:13px; margin-top:39px; flex-wrap:wrap; }
-    .mini-stat { border-left:2px solid var(--cyan); padding-left:11px; }
-    .mini-stat strong { display:block; font-size:1rem; }
-    .mini-stat span { font-size:.73rem; color:var(--muted); font-weight:700; }
-
-    /* HERO VISUAL */
-    .hero-visual { position:relative; min-height: 460px; perspective: 1400px; }
-    .core-glow {
-      position:absolute; width:245px; height:245px; border-radius:50%; top:102px; left:50%;
-      transform:translateX(-50%); background:radial-gradient(circle, rgba(49,198,255,.38), rgba(99,101,255,.12) 42%, transparent 70%);
-      filter:blur(4px); animation: breathe 4s ease-in-out infinite;
-    }
-    @keyframes breathe { 50% { transform:translateX(-50%) scale(1.17); opacity:.7;} }
-    .dashboard {
-      position:absolute; inset:48px 7% 30px 5%; overflow:hidden;
-      border-radius:23px; border:1px solid rgba(139,185,255,.35);
-      background:linear-gradient(145deg, rgba(16,39,82,.96), rgba(7,20,47,.93));
-      box-shadow: var(--shadow), 0 0 70px rgba(49,134,255,.15);
-      transform:rotateY(-8deg) rotateX(4deg);
-      animation: dashboardFloat 7s ease-in-out infinite;
-    }
-    body.light-mode .dashboard { background:linear-gradient(145deg,#f8fbff,#e9f1ff); }
-    @keyframes dashboardFloat { 50% { transform:rotateY(-4deg) rotateX(1deg) translateY(-12px); } }
-    .dash-head { height:57px; display:flex; align-items:center; justify-content:space-between; padding:0 19px; border-bottom:1px solid var(--line); }
-    .dash-brand { display:flex; align-items:center; gap:8px; font-weight:900; font-size:.85rem; }
-    .dash-brand b { color:var(--cyan); }
-    .lights { display:flex; gap:6px; } .lights i{width:8px;height:8px;border-radius:50%;display:block;background:#ff6d7a}.lights i:nth-child(2){background:#ffd066}.lights i:nth-child(3){background:#25ca96}
-    .dash-main { display:grid; grid-template-columns:120px 1fr; min-height:322px; }
-    .dash-side { padding:17px 12px; border-right:1px solid var(--line); }
-    .dash-link { height:25px; border-radius:7px; margin-bottom:11px; background:rgba(128,162,230,.14); }
-    .dash-link.active { background:linear-gradient(90deg, rgba(45,198,255,.53), rgba(86,90,255,.28)); }
-    .dash-content { padding:18px; }
-    .dash-title { width:53%; height:15px; border-radius:8px; background:linear-gradient(90deg,var(--cyan),var(--purple)); margin-bottom:18px; opacity:.9; }
-    .dash-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-    .metric-card { height:63px; border:1px solid var(--line); background:rgba(255,255,255,.045); border-radius:11px; padding:10px; }
-    .metric-card small { color:var(--muted); display:block; font-size:.54rem; font-weight:800; }
-    .metric-card b { display:block; margin-top:5px; font-size:.94rem; }
-    .metric-card:nth-child(1) b{color:var(--cyan)}.metric-card:nth-child(2) b{color:var(--orange)}.metric-card:nth-child(3) b{color:var(--green)}
-    .chart-box { margin-top:13px; height:126px; border:1px solid var(--line); border-radius:12px; padding:13px; position:relative; overflow:hidden; background:rgba(255,255,255,.03); }
-    .chart-grid { position:absolute; inset:14px; background:repeating-linear-gradient(to bottom,transparent 0,transparent 25px,var(--line) 26px); opacity:.62; }
-    .line-a,.line-b { position:absolute; left:17px; right:17px; height:68px; bottom:21px; }
-    .line-a svg,.line-b svg{width:100%;height:100%;overflow:visible}.line-a path{stroke:var(--cyan)}.line-b path{stroke:var(--purple)}
-    .line-a path,.line-b path{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-
-    .floating-chip {
-      position:absolute; z-index:3; display:flex; align-items:center; gap:10px;
-      padding:10px 12px; border:1px solid var(--line); border-radius:13px; background:rgba(7,20,44,.78); backdrop-filter:blur(15px); box-shadow:var(--shadow);
-      font-size:.73rem; font-weight:900; color:var(--text);
-      animation:floatChip 4s ease-in-out infinite alternate;
-    }
-    body.light-mode .floating-chip { background:rgba(255,255,255,.82); }
-    .floating-chip i { font-size:1.05rem; color:var(--cyan); }
-    .chip-a{right:0;top:9%;}.chip-b{left:-2%;bottom:8%;animation-delay:-1.8s}.chip-c{right:3%;bottom:2%;animation-delay:-.8s}.chip-c i{color:var(--green)}.chip-b i{color:var(--purple)}
-    @keyframes floatChip{to{transform:translateY(-14px)}}
-    .orbit { position:absolute; border:1px dashed rgba(90,184,255,.24); border-radius:50%; left:50%; top:50%; transform:translate(-50%,-50%); animation:spin 18s linear infinite; }
-    .orbit.one{width:435px;height:435px}.orbit.two{width:350px;height:350px;animation-direction:reverse;animation-duration:14s}
-    .orbit::after { content:""; position:absolute; width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 17px var(--cyan);top:5%;left:18%; }
-    .orbit.two::after{background:var(--purple);box-shadow:0 0 17px var(--purple);left:auto;right:15%;top:auto;bottom:5%}
-    @keyframes spin {to{transform:translate(-50%,-50%) rotate(360deg)}}
-
-    /* SECTION */
-    section.projects { padding: 82px 0 28px; }
-    .section-top { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:32px; }
-    .section-kicker { color:var(--cyan); font:500 .75rem "DM Mono",monospace; letter-spacing:.1em; text-transform:uppercase; }
-    .section-title { margin:8px 0 0; font-size:clamp(2rem,3.5vw,3.1rem); line-height:1.04; letter-spacing:-1.7px; }
-    .section-copy { max-width:400px; color:var(--muted); font-size:.92rem; line-height:1.75; }
-
-    .project-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
-    .project-card {
-      position:relative; overflow:hidden; border:1px solid var(--line); border-radius:20px; min-height:395px;
-      background:var(--surface); box-shadow:var(--shadow); cursor:pointer; transition:.35s ease;
-      display:flex; flex-direction:column;
-    }
-    .project-card:hover { transform:translateY(-9px); border-color:rgba(74,204,255,.68); box-shadow:0 28px 55px rgba(0,0,0,.35); }
-    .card-art { height:167px; position:relative; overflow:hidden; background:#0b1c3e; border-bottom:1px solid var(--line); }
-    .card-art img { width:100%;height:100%;object-fit:cover; display:block; opacity:.86; transition:.5s ease; }
-    .project-card:hover .card-art img { transform:scale(1.07); opacity:1; }
-    .card-art::after { content:""; position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(6,17,38,.82)); pointer-events:none; }
-    .card-icon { position:absolute; z-index:2; top:14px;left:14px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--accentA),var(--accentB));box-shadow:0 8px 20px rgba(0,0,0,.3); }
-    .card-fallback { position:absolute; inset:0; display:grid; place-items:center; font-size:4rem; color:rgba(255,255,255,.75); background:linear-gradient(135deg,var(--accentA),var(--accentB)); }
-    .card-body { padding:19px 19px 18px; display:flex; flex-direction:column; flex:1; }
-    .card-title { margin:0 0 9px; font-size:1.12rem; letter-spacing:-.5px; line-height:1.22; }
-    .card-desc { margin:0 0 16px; color:var(--muted); font-size:.83rem; line-height:1.66; flex:1; }
-    .tags { display:flex;flex-wrap:wrap;gap:7px; margin-bottom:16px; }
-    .tag { border:1px solid var(--line); background:rgba(255,255,255,.035); padding:5px 8px; border-radius:999px; color:var(--muted); font-size:.61rem; font-weight:800; letter-spacing:.03em; text-transform:uppercase; }
-    .card-link { color:var(--cyan); font-size:.78rem; font-weight:900; display:flex;align-items:center;gap:8px; }
-
-    /* PROJECT DETAIL */
-    #project-view { display:none; padding:112px 0 72px; min-height:100vh; }
-    .back-btn { border:1px solid var(--line); background:var(--surface);color:var(--text); border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:800;font-size:.78rem; transition:.25s ease; }
-    .back-btn:hover{border-color:var(--cyan);transform:translateX(-3px)}
-    .project-head { text-align:center; margin:38px auto 32px; max-width:950px; }
-    .project-head h1 { margin:13px 0; font-size:clamp(2.2rem,4.4vw,4.35rem); line-height:1; letter-spacing:-2.3px; }
-    .project-head p { margin:0 auto; max-width:775px;color:var(--muted);line-height:1.8;font-size:1.04rem; }
-    .project-cover { width:100%; height:min(48vw,570px); min-height:280px; object-fit:cover;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);background:var(--surface-solid); }
-    .project-content { display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:35px;margin-top:42px;align-items:start; }
-    .article { min-width:0; }
-    .article h2 { font-size:1.45rem; margin:38px 0 14px; color:var(--cyan); letter-spacing:-.5px; }
-    .article h2:first-child{margin-top:0}
-    .article p,.article li { color:var(--muted);line-height:1.85;font-size:.97rem; }
-    .article ul { padding-left:21px; }
-    .article li { margin:9px 0; }
-    .article strong { color:var(--text); }
-    .article code { color:#b8ecff;background:rgba(48,196,255,.12);padding:2px 5px;border-radius:5px;font-family:"DM Mono",monospace;font-size:.84em; }
-    .article img { width:100%; margin:20px 0; border-radius:14px; border:1px solid var(--line); box-shadow:var(--shadow); }
-    .article blockquote { margin:27px 0; padding:18px 20px; border-left:3px solid var(--cyan); background:rgba(35,181,255,.07);border-radius:0 14px 14px 0;color:var(--text);font-weight:700;line-height:1.7; }
-    .aside { position:sticky;top:95px;padding:20px;border:1px solid var(--line);background:var(--surface);border-radius:18px; }
-    .aside h3 { font-size:.9rem;margin:0 0 12px; }
-    .aside h3:not(:first-child){margin-top:23px}
-    .metric-list { list-style:none;margin:0;padding:0; }
-    .metric-list li { display:flex; gap:9px;align-items:flex-start;color:var(--muted);font-size:.8rem;line-height:1.5;margin:10px 0; }
-    .metric-list i { margin-top:3px;color:var(--green); }
-    .project-image-error { display:none; }
-
-    footer { border-top:1px solid var(--line);margin-top:65px;padding:29px 0;color:var(--muted);font-size:.8rem; }
-    .footer-row { display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap; }
-    .footer-row strong { color:var(--text); }
-
-    @media (max-width: 1010px) {
-      .hero-grid { grid-template-columns:1fr; }
-      .hero-content { text-align:center; display:flex;flex-direction:column;align-items:center; }
-      .hero-mini-stats { justify-content:center; }
-      .hero-visual { width:min(660px,100%);margin:auto; }
-      .project-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .section-top { align-items:start;flex-direction:column; }
-    }
-    @media (max-width: 720px) {
-      .nav-links a:not(.github-link) { display:none; }
-      .nav-content { height:66px; }
-      .hero { padding-top:96px; }
-      .hero h1 { letter-spacing:-2px; }
-      .hero-visual { min-height:365px; transform:scale(.88); transform-origin:top center; margin-bottom:-35px; }
-      .chip-b { left:0; }.chip-a { right:0; }.orbit.one{width:360px;height:360px}.orbit.two{width:285px;height:285px}
-      .project-grid { grid-template-columns:1fr; }
-      .project-content { grid-template-columns:1fr; }
-      .aside { position:static; }
-      .project-cover { height:260px; }
-    }
-  </style>
+</style>
 </head>
-
 <body>
-  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-  <nav>
-    <div class="container nav-content">
-      <a class="brand" href="#sobre" onclick="closeProject();">
-        <span class="brand-mark"><i class="fa-solid fa-code"></i></span>
-        Léu<span>Klein</span>
-      </a>
-      <div class="nav-links">
-        <a href="#sobre" onclick="closeProject();">Sobre</a>
-        <a href="#projetos" onclick="closeProject();">Portfólio</a>
-        <a class="github-link" href="https://github.com/lklrocha" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
-        <button class="icon-button" id="theme-toggle" type="button" title="Alternar tema" aria-label="Alternar tema"><i class="fa-solid fa-moon" id="theme-icon"></i></button>
+<nav><div class="container nav-content">
+  <a class="brand" href="#sobre" onclick="closeProject()"><span class="brand-mark"><i class="fa-solid fa-code"></i></span>Léu<span>Klein</span></a>
+  <div class="nav-links">
+    <a href="#sobre" onclick="closeProject()">Sobre</a>
+    <a href="#projetos" onclick="closeProject()">Portfólio</a>
+    <a class="github" href="https://github.com/leonardoklein-vc" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
+    <button class="icon-btn" id="theme-toggle" type="button" title="Alternar tema"><i class="fa-solid fa-moon" id="theme-icon"></i></button>
+  </div>
+</div></nav>
+
+<main id="main-view">
+  <section id="hero" class="hero container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow"><span class="pulse"></span> Solutions Architect · Google Workspace · HealthTech</span>
+        <h1>Arquitetura de soluções para <span class="gradient">operações que não podem parar.</span></h1>
+        <p>Transformo processos clínicos, dados descentralizados e tarefas operacionais críticas em plataformas serverless seguras, rápidas e centradas nas pessoas — combinando IA, automação, UX e governança.</p>
+        <div class="actions"><a href="#projetos" class="btn btn-primary">Explorar projetos <i class="fa-solid fa-arrow-down"></i></a><a href="https://github.com/leonardoklein-vc" target="_blank" rel="noopener" class="btn btn-soft"><i class="fa-brands fa-github"></i> Ver GitHub</a></div>
+        <div class="hero-stats"><div class="hero-stat"><strong>Serverless</strong><span>Google Apps Script</span></div><div class="hero-stat"><strong>Client-side</strong><span>Performance & LGPD</span></div><div class="hero-stat"><strong>IA aplicada</strong><span>Automação útil</span></div></div>
       </div>
-    </div>
-  </nav>
-
-  <main id="main-view">
-    <section id="sobre" class="hero container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <span class="eyebrow"><span class="pulse"></span> Solutions Architect · Google Workspace</span>
-          <h1>Arquitetura de soluções para <span class="gradient">operações que não podem parar.</span></h1>
-          <p>Transformo processos clínicos, dados descentralizados e tarefas operacionais críticas em plataformas serverless seguras, rápidas e centradas nas pessoas — combinando IA, automação, UX e governança.</p>
-          <div class="hero-actions">
-            <a href="#projetos" class="btn btn-primary">Explorar projetos <i class="fa-solid fa-arrow-down"></i></a>
-            <a href="https://github.com/lklrocha" class="btn btn-secondary" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Ver GitHub</a>
-          </div>
-          <div class="hero-mini-stats">
-            <div class="mini-stat"><strong>Serverless</strong><span>Google Apps Script</span></div>
-            <div class="mini-stat"><strong>Client-side</strong><span>Performance & LGPD</span></div>
-            <div class="mini-stat"><strong>IA aplicada</strong><span>Automação útil</span></div>
-          </div>
-        </div>
-
-        <div class="hero-visual" aria-label="Painel tecnológico ilustrativo">
-          <div class="core-glow"></div>
-          <div class="orbit one"></div><div class="orbit two"></div>
-
-          <div class="floating-chip chip-a"><i class="fa-solid fa-shield-halved"></i> Compliance & LGPD</div>
-          <div class="floating-chip chip-b"><i class="fa-solid fa-brain"></i> IA aplicada</div>
-          <div class="floating-chip chip-c"><i class="fa-solid fa-bolt"></i> Milissegundos</div>
-
-          <div class="dashboard">
-            <div class="dash-head">
-              <div class="dash-brand"><i class="fa-solid fa-layer-group"></i> Solutions <b>Hub</b></div>
-              <div class="lights"><i></i><i></i><i></i></div>
-            </div>
-            <div class="dash-main">
-              <div class="dash-side">
-                <div class="dash-link active"></div><div class="dash-link"></div><div class="dash-link"></div><div class="dash-link"></div><div class="dash-link"></div>
-              </div>
-              <div class="dash-content">
-                <div class="dash-title"></div>
-                <div class="dash-cards">
-                  <div class="metric-card"><small>PROCESSOS</small><b>+ Automação</b></div>
-                  <div class="metric-card"><small>SEGURANÇA</small><b>LGPD Ready</b></div>
-                  <div class="metric-card"><small>INSIGHTS</small><b>BI em tempo real</b></div>
-                </div>
-                <div class="chart-box">
-                  <div class="chart-grid"></div>
-                  <div class="line-a"><svg viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 60 C25 42 35 57 58 38 S96 47 120 28 S158 37 178 19 S218 35 238 20 S275 31 300 7"/></svg></div>
-                  <div class="line-b"><svg viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 68 C18 70 36 50 55 62 S89 52 114 57 S154 33 179 49 S221 29 246 41 S278 22 300 28"/></svg></div>
-                </div>
-              </div>
-            </div>
+      <div class="hero-visual" aria-label="Painel tecnológico ilustrativo">
+        <div class="core-glow"></div><div class="orbit one"></div><div class="orbit two"></div>
+        <div class="chip chip-a"><i class="fa-solid fa-shield-halved"></i> Compliance & LGPD</div><div class="chip chip-b"><i class="fa-solid fa-brain"></i> IA aplicada</div><div class="chip chip-c"><i class="fa-solid fa-bolt"></i> Milissegundos</div>
+        <div class="dash"><div class="dash-head"><div class="dash-brand"><i class="fa-solid fa-layer-group"></i> Solutions <b>Hub</b></div><div class="lights"><i></i><i></i><i></i></div></div>
+          <div class="dash-main"><div class="dash-side"><div class="dash-link active"></div><div class="dash-link"></div><div class="dash-link"></div><div class="dash-link"></div><div class="dash-link"></div></div>
+            <div class="dash-content"><div class="dash-title"></div><div class="dash-cards"><div class="metric"><small>PROCESSOS</small><b>+ Automação</b></div><div class="metric"><small>SEGURANÇA</small><b>LGPD Ready</b></div><div class="metric"><small>INSIGHTS</small><b>BI em tempo real</b></div></div><div class="chart"><svg viewBox="0 0 300 80" preserveAspectRatio="none"><path class="line1" d="M0 60 C25 42 35 57 58 38 S96 47 120 28 S158 37 178 19 S218 35 238 20 S275 31 300 7"/><path class="line2" d="M0 68 C18 70 36 50 55 62 S89 52 114 57 S154 33 179 49 S221 29 246 41 S278 22 300 28"/></svg></div></div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projetos" class="projects container">
-      <div class="section-top">
-        <div>
-          <div class="section-kicker">Selected work / 2026</div>
-          <h2 class="section-title">Sistemas que transformam<br>complexidade em fluidez.</h2>
-        </div>
-        <p class="section-copy">Estudos de caso de produtos construídos para ambientes reais: hospitais, dados sensíveis, operações críticas e usuários sob pressão.</p>
+  <section id="sobre" class="section container">
+    <div class="section-top"><div><div class="kicker">About / perfil profissional</div><h2 class="section-title">Tecnologia aplicada<br>ao trabalho real.</h2></div><p class="section-copy">Uma apresentação deliberadamente focada no que é verificável no portfólio: problemas enfrentados, decisões técnicas e produtos entregues.</p></div>
+    <div class="about-grid">
+      <div class="about-main">
+        <h3>Leonardo Klein Rocha — “LéuKlein”</h3>
+        <p>Atuo na interseção entre <strong>operações em saúde, dados, automação e experiência do usuário</strong>. Meu foco é reconhecer o ponto em que um processo deixa de ser apenas uma planilha e passa a exigir arquitetura: regras claras, segurança, rastreabilidade, interfaces que reduzem erro e uma base sustentável para evolução.</p>
+        <p>Em vez de começar pela tecnologia, começo pelo fluxo: quem opera, onde há retrabalho, quais decisões precisam ser auditáveis e quais dados não podem se perder. A partir disso, desenho SPAs serverless no ecossistema Google Workspace, com processamento no navegador quando isso reduz custo, melhora desempenho e protege dados sensíveis.</p>
+        <p>Os projetos desta página refletem esse recorte: BI oncológico, gestão cirúrgica, documentos e prontuários, processamento privado de PDFs e uma EdTech com IA generativa e gamificação.</p>
       </div>
-      <div id="project-grid" class="project-grid" aria-live="polite"></div>
-    </section>
-  </main>
-
-  <main id="project-view">
-    <div class="container">
-      <button class="back-btn" type="button" onclick="closeProject()"><i class="fa-solid fa-arrow-left"></i> Voltar ao portfólio</button>
-
-      <header class="project-head">
-        <div id="proj-tags" class="tags" style="justify-content:center"></div>
-        <h1 id="proj-title">Projeto</h1>
-        <p id="proj-subtitle"></p>
-      </header>
-
-      <img id="proj-hero-img" class="project-cover" src="" alt="Capa do projeto">
-      <div class="project-content">
-        <article id="proj-article" class="article"></article>
-        <aside class="aside">
-          <h3>Tecnologias</h3>
-          <div id="proj-techs" class="tags"></div>
-          <h3>Impactos e destaques</h3>
-          <ul id="proj-metrics" class="metric-list"></ul>
-        </aside>
+      <div class="about-side">
+        <div class="about-fact"><i class="fa-solid fa-heart-pulse"></i><div><strong>Domínio de atuação</strong><span>Operações hospitalares, dados clínicos, compliance e produtividade de equipes.</span></div></div>
+        <div class="about-fact"><i class="fa-solid fa-cubes"></i><div><strong>Arquitetura</strong><span>SPAs serverless, Library/Shell, integrações Workspace e automação orientada a processos.</span></div></div>
+        <div class="about-fact"><i class="fa-solid fa-user-shield"></i><div><strong>Princípios</strong><span>LGPD, rastreabilidade, performance percebida e UX para ambientes de alta pressão.</span></div></div>
+        <div class="about-fact"><i class="fa-solid fa-wand-magic-sparkles"></i><div><strong>IA aplicada</strong><span>IA como instrumento de trabalho: extração, síntese, apoio à decisão, estudo e automação contextual.</span></div></div>
       </div>
     </div>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <span><strong>LéuKlein</strong> · Arquitetura de Soluções</span>
-      <span>Feito com foco em impacto, segurança e experiência.</span>
+    <div class="focus-row">
+      <div class="focus"><i class="fa-solid fa-hospital"></i><b>HealthTech</b><span>Fluxos críticos e dados sensíveis.</span></div>
+      <div class="focus"><i class="fa-solid fa-chart-line"></i><b>Dados & BI</b><span>Indicadores acionáveis, não dashboards decorativos.</span></div>
+      <div class="focus"><i class="fa-solid fa-lock"></i><b>Segurança</b><span>LGPD e controle operacional embutidos no produto.</span></div>
+      <div class="focus"><i class="fa-solid fa-rocket"></i><b>Produto</b><span>Interfaces que fazem a equipe ganhar tempo hoje e escalar amanhã.</span></div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    "use strict";
+  <section id="projetos" class="section container">
+    <div class="section-top"><div><div class="kicker">Selected work / 2026</div><h2 class="section-title">Sistemas que transformam<br>complexidade em fluidez.</h2></div><p class="section-copy">Estudos de caso construídos para ambientes reais: hospitais, dados sensíveis, operações críticas e usuários sob pressão.</p></div>
+    <div id="project-grid" class="project-grid" aria-live="polite"></div>
+  </section>
+</main>
 
-    // Substitua os links abaixo por imagens versionadas dentro do seu repositório
-    // (ex.: assets/covers/rhc-pro.webp) quando publicar no GitHub Pages.
+<main id="project-view"><div class="container">
+  <button class="back" type="button" onclick="closeProject()"><i class="fa-solid fa-arrow-left"></i> Voltar ao portfólio</button>
+  <header class="project-head"><div id="proj-tags" class="tags" style="justify-content:center"></div><h1 id="proj-title">Projeto</h1><p id="proj-subtitle"></p></header>
+  <img id="proj-hero-img" class="cover" src="" alt="Capa do projeto">
+  <div class="project-content"><article id="proj-article" class="article"></article><aside class="aside"><h3>Tecnologias</h3><div id="proj-techs" class="tags"></div><h3>Impactos e destaques</h3><ul id="proj-metrics" class="metrics"></ul></aside></div>
+</div></main>
+
+<footer><div class="container footer-row"><span><strong>LéuKlein</strong> · Arquitetura de Soluções</span><span>Feito com foco em impacto, segurança e experiência.</span></div></footer>
+
+<script>
+"use strict";
+/*
+      CATÁLOGO DE PROJETOS
+      - Ordem intencional: MoogIA primeiro, RHC Pro em segundo.
+      - Cada artigo mantém o conteúdo rico dos READMEs e das iterações anteriores.
+      - Para produção, prefira imagens locais versionadas em /assets/covers.
+    */
     const projetos = [
-      {
-        id: "rhc-pro",
-        icon: "fa-chart-line",
-        accentA: "#0ea5e9",
-        accentB: "#6d5cff",
-        title: "RHC Pro v2: Enterprise Clinical Data Hub & BI",
-        subtitle: "Governança de dados clínicos, auditoria automatizada e BI oncológico de alta performance em uma SPA serverless.",
-        thumb: "https://i.ibb.co/60L0J0FN/56db6501-bd91-4eaa-8d17-578bdc8421a2.png",
-        heroImg: "https://i.ibb.co/60L0J0FN/56db6501-bd91-4eaa-8d17-578bdc8421a2.png",
-        tags: ["HealthTech", "Business Intelligence", "Library/Shell", "LGPD"],
-        techs: ["Google Apps Script", "Vanilla JS", "Chart.js", "html2pdf.js", "Google Drive API"],
-        metrics: ["Filtros cruzados em milissegundos com Smart Cache", "Auditoria temporal de perdas reais com tolerância -12/+2", "Relatórios executivos PDF processados in-browser"],
-        article: `
-          <h2><i class="fa-solid fa-triangle-exclamation"></i> O desafio: dados clínicos dispersos</h2>
-          <p>O Registro Hospitalar de Câncer operava com um volume complexo e descentralizado de dados. Indicadores como a Lei dos 60 Dias exigiam mineração manual, enquanto múltiplas bases isoladas reduziam a rastreabilidade das ações e ampliavam o risco de inconsistências.</p>
-          <img src="https://github.com/user-attachments/assets/9f081a57-8189-47ad-8c1e-1d16de115192" alt="Planilha operacional anterior do RHC">
-          <h2><i class="fa-solid fa-diagram-project"></i> Arquitetura modular: Core, Shells e Hub</h2>
-          <p>O ecossistema foi organizado no padrão <strong>Library/Shell</strong>: um <strong>RHC Core</strong> centraliza regras de negócio; planilhas operacionais atuam como clientes leves; e o <strong>RHC Pro Hub</strong> concentra BI, gestão de bases, auditoria, backups e POPs.</p>
-          <ul>
-            <li><strong>Core Library:</strong> regras e interfaces atualizadas em um único ponto, refletindo em toda a operação.</li>
-            <li><strong>Client Shells:</strong> terminais operacionais conectados por funções de ponte, reduzindo duplicação e risco de versões divergentes.</li>
-            <li><strong>Hub executivo:</strong> leitura consolidada, governança e visualização estratégica da operação.</li>
-          </ul>
-          <img src="https://github.com/user-attachments/assets/8eb5d33c-8fa3-48c2-998b-64816ea79840" alt="Gestor de bases do RHC Pro">
-          <h2><i class="fa-solid fa-bolt"></i> BI in-browser: processamento onde ele faz sentido</h2>
-          <p>Para contornar limites de execução do ambiente serverless, os dados tratados são entregues ao navegador e persistidos em <code>localStorage</code>. A aplicação aplica filtros complexos e renderiza visualizações com Chart.js sem recarregar a página, reduzindo a percepção de espera do usuário.</p>
-          <blockquote>“Transformamos conferências manuais de dias em um cruzamento de dados acionado em poucos segundos.”</blockquote>
-          <h2><i class="fa-solid fa-clock-rotate-left"></i> Auditoria contínua e máquina do tempo</h2>
-          <p>O motor de auditoria percorre bases e pastas de forma hierárquica. A lógica de índices absolutos de mês permite justificar registros temporalmente válidos no passado ou no futuro e isolar os casos que realmente exigem ação de compliance.</p>
-          <h2><i class="fa-solid fa-file-pdf"></i> Relatórios sem expor dados</h2>
-          <p>O dashboard é clonado e preparado para impressão no próprio browser. Com <code>html2pdf.js</code>, relatórios executivos são gerados diretamente na memória do usuário, preservando o fluxo de segurança e evitando renderização em serviços externos.</p>
-        `
-      },
-      {
-        id: "smart-scheduling",
-        icon: "fa-calendar-check",
-        accentA: "#18b77d",
-        accentB: "#1d90f5",
-        title: "Smart Scheduling Hub — HCPA",
-        subtitle: "Gestão cirúrgica com timeline visual, controle de acesso por função e integrações hospitalares em um único fluxo.",
-        thumb: "https://github.com/user-attachments/assets/ffb0e43b-d11d-42cc-8626-c9313ba0aecf",
-        heroImg: "https://github.com/user-attachments/assets/9966c830-c1b0-4632-97a7-1294d62f56e0",
-        tags: ["HealthTech", "Scheduling", "RBAC", "Google Drive"],
-        techs: ["Google Apps Script", "Vanilla JS", "HTML5/CSS3", "LockService", "CacheService", "Drive API"],
-        metrics: ["Timeline por sala cirúrgica para leitura imediata de conflitos", "RBAC para diferentes perfis operacionais", "Dados e anexos centralizados em um único ponto"],
-        article: `
-          <h2><i class="fa-solid fa-triangle-exclamation"></i> O problema: uma agenda crítica presa à planilha</h2>
-          <p>O agendamento de cirurgias de convênio dependia de uma planilha extensa e estática. A visualização de vagas e equipes era limitada, usuários podiam alterar dados críticos acidentalmente e anexos ou comunicações eram gerenciados fora do fluxo principal.</p>
-          <img src="https://github.com/user-attachments/assets/9966c830-c1b0-4632-97a7-1294d62f56e0" alt="Cenário anterior de agendamento">
-          <h2><i class="fa-solid fa-calendar-days"></i> Uma SPA para a visão do dia</h2>
-          <p>A solução transforma dados de planilha em <strong>cards operacionais</strong> e uma <strong>timeline por salas cirúrgicas</strong>. A leitura dos conflitos passa a ser visual, com filtros rápidos para autorização, pendências e demais estados relevantes.</p>
-          <img src="https://github.com/user-attachments/assets/ffb0e43b-d11d-42cc-8626-c9313ba0aecf" alt="Dashboard do Smart Scheduling">
-          <h2><i class="fa-solid fa-user-shield"></i> RBAC: a interface respeita o papel de cada pessoa</h2>
-          <ul>
-            <li><strong>Super Admin e Agendamento:</strong> CRUD completo e gestão do fluxo.</li>
-            <li><strong>Autorização:</strong> acesso a dados financeiros e técnicos específicos.</li>
-            <li><strong>Guichê/Recepção:</strong> atualização focada na chegada do paciente.</li>
-            <li><strong>Leitores:</strong> visualização sem alterar a base.</li>
-          </ul>
-          <h2><i class="fa-solid fa-link"></i> Drive e WhatsApp no mesmo processo</h2>
-          <p>O sistema provisiona pastas padronizadas no Drive a partir do modal do paciente e constrói mensagens inteligentes para WhatsApp Web. Checklists e horários de chegada são calculados a partir do procedimento, reduzindo passos manuais e retrabalho.</p>
-          <img src="https://github.com/user-attachments/assets/371d1231-3d16-45e0-a671-669655e9ef55" alt="Integração e detalhe do agendamento">
-          <h2><i class="fa-solid fa-gears"></i> Engenharia para uso simultâneo</h2>
-          <p><code>LockService</code> protege operações concorrentes; <code>CacheService</code> reduz leituras repetidas da base; e rotinas de verificação impedem movimentações ou cancelamentos que poderiam causar falhas silenciosas.</p>
-        `
-      },
-      {
-        id: "smart-requests",
-        icon: "fa-folder-open",
-        accentA: "#f97316",
-        accentB: "#ef476f",
-        title: "Smart Requests Manager",
-        subtitle: "Gestão segura do ciclo de vida de requerimentos e prontuários médicos, com compliance, Drive e mensageria assíncrona.",
-        thumb: "https://github.com/user-attachments/assets/d0aff338-e047-4f0f-804f-3c9447cbc145",
-        heroImg: "https://github.com/user-attachments/assets/c181eac6-1098-4221-878b-ef222dc4e6bb",
-        tags: ["LGPD", "Workflow", "Soft Lock", "PDF Engine"],
-        techs: ["Google Apps Script", "Google Drive API", "Gmail API", "pdf-lib", "pdf.js", "Regex"],
-        metrics: ["Soft-lock de 15 minutos contra race conditions", "Fallback de PDFs corrompidos via canvas", "Liberação condicionada por workflow de LGPD"],
-        article: `
-          <h2><i class="fa-solid fa-triangle-exclamation"></i> O contexto: liberar documentos com segurança</h2>
-          <p>A solicitação de prontuários médicos é uma operação crítica. Em um fluxo baseado em planilhas compartilhadas, edições simultâneas, arquivos organizados manualmente e regras de liberação pouco auditáveis representam riscos operacionais e de compliance.</p>
-          <img src="https://github.com/user-attachments/assets/d0aff338-e047-4f0f-804f-3c9447cbc145" alt="Fluxo do Smart Requests">
-          <h2><i class="fa-solid fa-file-pdf"></i> Processamento resiliente no navegador</h2>
-          <p>Arquivos pesados são processados no cliente para evitar timeouts do servidor. PDFs, JPGs e PNGs são convertidos e mesclados em um único volume. Para documentos fora do padrão, há uma estratégia de resgate: quando <code>pdf-lib</code> falha, <code>pdf.js</code> rasteriza o conteúdo em canvas e o documento é reconstruído de forma segura.</p>
-          <h2><i class="fa-solid fa-shield-halved"></i> Smart Status para LGPD</h2>
-          <ul>
-            <li><strong>Próprio paciente:</strong> pasta provisionada com acesso por link em ambiente controlado.</li>
-            <li><strong>Terceiros:</strong> pasta começa privada, a interface exige documentos legais e bloqueia a continuidade até a validação.</li>
-            <li><strong>Trilha operacional:</strong> cada etapa é guiada por regras visíveis para reduzir interpretações inconsistentes.</li>
-          </ul>
-          <h2><i class="fa-solid fa-lock"></i> Soft-lock e integridade da fila</h2>
-          <p>Quando alguém abre uma solicitação, o sistema sinaliza globalmente que ela está em uso. Um TTL de 15 minutos ajuda a evitar sobrescritas e reduz conflitos de edição em uma fila compartilhada.</p>
-          <img src="https://github.com/user-attachments/assets/7f076f0-081d-406b-bf17-711763d4e7ef" alt="Interface de produtividade do Smart Requests" onerror="this.style.display='none'">
-          <h2><i class="fa-solid fa-envelope-open-text"></i> Parsing e mensageria fora da tela</h2>
-          <p>Requerimentos recebidos por e-mail passam por Regex para preencher campos estruturados. Para manter a experiência responsiva, os disparos são encaminhados a uma fila assíncrona, processada no background por gatilhos programados.</p>
-        `
-      },
-      {
-        id: "doc-count",
-        icon: "fa-box-archive",
-        accentA: "#9d5cff",
-        accentB: "#ff4f90",
-        title: "Sistema Integrado de Contagem de Documentos",
-        subtitle: "Gestão documental hospitalar com OCR, produtividade orientada por teclado, analytics e ferramentas PDF integradas.",
-        thumb: "https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f",
-        heroImg: "https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f",
-        tags: ["OCR", "Document Management", "Analytics", "Bootstrap"],
-        techs: ["Google Apps Script", "Bootstrap 5", "OCR.space API", "Chart.js", "pdf-lib", "localStorage"],
-        metrics: ["OCR reduz a carga de digitação manual", "Autocompletar prioriza tipos documentais recorrentes", "Rascunhos sobrevivem ao fechamento acidental do navegador"],
-        article: `
-          <h2><i class="fa-solid fa-triangle-exclamation"></i> O desafio: gestão documental fragmentada</h2>
-          <p>O controle de documentos e prontuários estava espalhado por dezenas de guias. Extrair métricas cruzadas dependia de esforço manual intenso, o volume comprometia a fluidez das planilhas e os lançamentos repetitivos aumentavam a exposição a erros.</p>
-          <h2><i class="fa-solid fa-database"></i> Uma base central, uma interface para trabalhar</h2>
-          <p>A solução usa Google Apps Script como backend e entrega uma interface responsiva em HTML, JavaScript e Bootstrap. A equipe opera a aplicação sem precisar manipular diretamente a planilha que sustenta o banco de dados.</p>
-          <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Recursos pensados para velocidade operacional</h2>
-          <ul>
-            <li><strong>OCR integrado:</strong> leitura de documentos escaneados para preencher campos e reduzir data entry.</li>
-            <li><strong>Autocomplete VIP:</strong> histórico de uso reposiciona tipos documentais frequentes no topo das sugestões.</li>
-            <li><strong>Analytics dinâmico:</strong> gráficos de evolução e rankings em tempo real com Chart.js.</li>
-            <li><strong>Estúdio PDF sob demanda:</strong> carregamento preguiçoso de ferramentas com pdf-lib, preservando memória.</li>
-            <li><strong>Motor de etiquetas:</strong> numeração, paginação e impressão física orientadas por regras.</li>
-          </ul>
-          <img src="https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f" alt="Sistema de contagem de documentos">
-          <h2><i class="fa-solid fa-keyboard"></i> Engenharia de fluidez</h2>
-          <p>Cache, processamento em lote e <code>localStorage</code> evitam perdas e chamadas excessivas. A navegação foi desenhada para uso intensivo via teclado, com comportamento de Enter adaptado ao fluxo de preenchimento.</p>
-        `
-      },
-      {
-        id: "estudio-pdf",
-        icon: "fa-file-pdf",
-        accentA: "#ef4444",
-        accentB: "#ff8e3c",
-        title: "Estúdio PDF Pro & AI Suite",
-        subtitle: "Suíte premium de PDFs e IA client-side: produtividade corporativa com privacidade absoluta e custo de infraestrutura reduzido.",
-        thumb: "https://github.com/user-attachments/assets/9777f096-09ab-4ddf-ade9-19eb597cfef2",
-        heroImg: "https://github.com/user-attachments/assets/81db6cc4-8816-4b7c-975e-b2d307935387",
-        tags: ["Client-Side", "LGPD", "PDF", "IA", "Library/Shell"],
-        techs: ["Google Apps Script", "pdf-lib", "pdf.js", "tesseract.js", "html2canvas", "Bootstrap 5"],
-        metrics: ["Mais de 15 ferramentas de PDF nativas", "Arquivos manipulados na memória local do usuário", "Torre de Controle com heartbeat de uso"],
-        article: `
-          <h2><i class="fa-solid fa-triangle-exclamation"></i> Segurança e produtividade não precisam competir</h2>
-          <p>Sem uma ferramenta oficial e rápida, equipes clínicas e administrativas recorrem a serviços externos para tratar PDFs. Para documentos corporativos e médicos, isso cria riscos de vazamento, limitações de upload e custos recorrentes de licenças.</p>
-          <h2><i class="fa-solid fa-laptop-code"></i> O navegador como servidor de processamento</h2>
-          <p>A arquitetura envia o motor para o navegador. Com <code>pdf-lib</code>, <code>pdf.js</code> e <code>tesseract.js</code>, as operações binárias acontecem na RAM local: o arquivo permanece no ambiente corporativo enquanto o usuário junta, separa, achata, mascara ou analisa documentos.</p>
-          <img src="https://github.com/user-attachments/assets/9777f096-09ab-4ddf-ade9-19eb597cfef2" alt="Módulo de processamento do Estúdio PDF">
-          <h2><i class="fa-solid fa-brain"></i> IA como assistente de leitura</h2>
-          <ul>
-            <li><strong>Chat com PDF:</strong> respostas ancoradas no conteúdo carregado.</li>
-            <li><strong>Resumo e extração:</strong> sínteses executivas de documentos extensos.</li>
-            <li><strong>Gerador de quiz:</strong> questões com gabarito a partir do material.</li>
-            <li><strong>Leitor imersivo:</strong> TTS com acompanhamento visual sincronizado.</li>
-            <li><strong>Tradução nativa:</strong> apoio à leitura preservando contexto técnico.</li>
-          </ul>
-          <img src="https://github.com/user-attachments/assets/81db6cc4-8816-4b7c-975e-b2d307935387" alt="Módulos de IA do Estúdio PDF">
-          <h2><i class="fa-solid fa-screwdriver-wrench"></i> Ferramentas de manipulação em lote</h2>
-          <p>A suíte reúne faxina de páginas em branco, Merge & Split, Flatten, redact irreversível de dados sensíveis, OCR local, marca d’água e conversões assistidas. A experiência inclui Drag & Drop, ações em lote e visualização em tela cheia.</p>
-          <h2><i class="fa-solid fa-tower-broadcast"></i> Governança modular e Torre de Controle</h2>
-          <p>No padrão <strong>Library/Shell</strong>, um core entrega lógica e UI a diferentes setores. Um heartbeat recorrente permite que a área técnica acompanhe usuários ativos e ferramentas em uso no painel administrativo.</p>
-        `
-      },
-      {
-        id: "moogia",
-        icon: "fa-graduation-cap",
-        accentA: "#1679f2",
-        accentB: "#8d3dff",
-        title: "MoogIA: EdTech Gamificada",
-        subtitle: "Uma jornada de estudos com IA, conteúdos ativos, mapas mentais, flashcards e gamificação para transformar estudo passivo em evolução visível.",
-        thumb: "https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db",
-        heroImg: "https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db",
-        tags: ["EdTech", "IA Generativa", "Gamificação", "SaaS"],
-        techs: ["Google Apps Script", "Vanilla JS", "Google Gemini", "Mermaid.js", "Bootstrap 5"],
-        metrics: ["Jornadas geradas a partir de materiais e editais", "Ferramentas ativas para retenção de conhecimento", "Arquitetura pronta para evolução SaaS"],
-        article: `
-          <h2><i class="fa-solid fa-triangle-exclamation"></i> O desafio: estudar de forma passiva e fragmentada</h2>
-          <p>Materiais dispersos, leitura passiva de PDFs e plataformas desconectadas ampliam a fadiga e dificultam uma rotina consistente. A proposta foi concentrar ferramentas de aprendizagem ativa em uma única experiência motivadora.</p>
-          <h2><i class="fa-solid fa-wand-magic-sparkles"></i> IA aplicada à jornada de estudo</h2>
-          <p>O MoogIA organiza materiais e conecta a Mesa de Estudos a recursos inteligentes. O nome evidencia a IA como parte da identidade do produto: não é só um complemento, mas o motor de personalização da experiência.</p>
-          <ul>
-            <li><strong>Smart Parsing:</strong> geração de jornadas estruturadas a partir de editais e conteúdos.</li>
-            <li><strong>Copiloto IA:</strong> conversa contextualizada com apontamentos e materiais.</li>
-            <li><strong>Resumos, mapas e flashcards:</strong> transformação do conteúdo em instrumentos de evocação ativa.</li>
-            <li><strong>Gamificação:</strong> streaks, XP e feedback visual para tornar o progresso perceptível.</li>
-          </ul>
-          <h2><i class="fa-solid fa-rocket"></i> Escala sustentável</h2>
-          <p>O desenho prioriza processamento no cliente quando possível, mantendo a infraestrutura leve e concentrando custos nas interações de IA que realmente agregam valor ao estudante.</p>
-        `
-      }
-    ];
+{
+ id:"moogia",icon:"fa-graduation-cap",accentA:"#1679f2",accentB:"#8d3dff",
+ title:"MoogIA: Estação de Estudos Gamificada com IA",
+ subtitle:"EdTech que combina documentos in-browser, IA generativa, gamificação e aprendizagem ativa para transformar estudo passivo em evolução visível.",
+ thumb:"https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db",
+ heroImg:"https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db",
+ tags:["EdTech","IA Generativa","Gamificação","SaaS","Client-side"],
+ techs:["Google Apps Script","Google Gemini","Vanilla JS","pdf-lib","pdf.js","tesseract.js","Mermaid.js","Bootstrap 5"],
+ metrics:["Jornadas estruturadas em JSON a partir de editais","Chat contextual com base fechada no material do aluno","Arquitetura SaaS Freemium com custo de infraestrutura inicial reduzido"],
+ article:`
+ <h2><i class="fa-solid fa-bullseye"></i> A missão: fazer o estudante sair do modo passivo</h2>
+ <p>O MoogIA nasce para resolver uma dor conhecida de quem estuda para concursos, universidade ou objetivos autodidatas: conteúdo espalhado, leitura cansativa de PDFs, ferramentas desconectadas e pouca visibilidade do progresso. A proposta é reunir o ecossistema de aprendizagem em uma <strong>SPA gamificada e orientada por IA</strong>, onde cada material pode se transformar em uma sequência prática de estudo.</p>
+ <img src="https://github.com/user-attachments/assets/7e00f15c-d6cc-461a-884e-20c5fe5012db" alt="Capa do MoogIA">
+ <h2><i class="fa-solid fa-gamepad"></i> Gamificação que representa progresso, não só enfeite</h2>
+ <p>A camada de engajamento foi desenhada para reforçar constância e feedback imediato. A mascote Moo guia a jornada e conecta ações do usuário a uma economia de progresso compreensível.</p>
+ <ul>
+   <li><strong>XP e streaks:</strong> leituras, simulados e atividades concluídas geram Pontos de Ruminação (PR), alimentando ofensivas e animações de evolução.</li>
+   <li><strong>Conquistas ocultas:</strong> badges ligados a comportamentos específicos, como estudo em horários incomuns ou produção consistente de resumos.</li>
+   <li><strong>MooDicas contextuais:</strong> mensagens de incentivo e sugestões ligadas à ferramenta aberta e à etapa atual da jornada.</li>
+   <li><strong>Visual de evolução:</strong> níveis, acessórios, expressões e marcos tornam a rotina de estudo percebida como uma trajetória.</li>
+ </ul>
+ <img src="https://github.com/user-attachments/assets/2f90fbc6-47a6-4715-85bc-74f7af388cea" alt="Dashboard e gamificação do MoogIA">
+ <h2><i class="fa-solid fa-brain"></i> IA generativa com utilidade e contexto fechado</h2>
+ <p>A integração com Gemini não foi pensada como um chat genérico. Ela opera sobre o texto extraído na Mesa de Estudos, reduzindo o risco de respostas desconectadas do material fornecido e transformando conteúdo em artefatos de aprendizagem ativa.</p>
+ <ul>
+   <li><strong>Smart Parsing de editais:</strong> identifica quadro de provas e conteúdo programático, monta uma Jornada de Estudos em JSON e distribui disciplinas na Agenda Inteligente.</li>
+   <li><strong>Copiloto IA:</strong> tutor que explica conceitos, cria analogias e responde com base no PDF ou apontamentos disponíveis.</li>
+   <li><strong>Mapas mentais:</strong> geração iterativa renderizada com Mermaid.js, incluindo pan, zoom e exportação.</li>
+   <li><strong>Flashcards e simulados:</strong> conteúdo transformado em repetição espaçada, questões de múltiplos formatos e gabarito comentado.</li>
+ </ul>
+ <img src="https://github.com/user-attachments/assets/a372fda2-880c-40a8-8bff-e5cad160f6f8" alt="Copiloto IA e recursos de estudo do MoogIA">
+ <h2><i class="fa-solid fa-file-pdf"></i> Mesa de Estudos: processamento local e acessibilidade</h2>
+ <p>Mais de 15 ferramentas de PDF funcionam diretamente no browser usando <code>pdf-lib</code> e <code>pdf.js</code>. O usuário pode juntar, dividir, extrair, achatar, aplicar marca d’água e remover páginas em branco sem depender de uploads para serviços externos.</p>
+ <ul>
+   <li><strong>OCR local:</strong> cadernos e imagens escaneadas tornam-se pesquisáveis para a IA usando <code>tesseract.js</code>.</li>
+   <li><strong>Fallback de PDFs corrompidos:</strong> rasterização em canvas e reconstrução silenciosa preservam a continuidade de uso.</li>
+   <li><strong>Leitor Imersivo:</strong> Text-to-Speech com marcação sincronizada de palavras, ajudando acessibilidade e reduzindo fadiga visual.</li>
+   <li><strong>Lasso e lupa:</strong> seleção de páginas em lote e inspeção detalhada para navegar melhor em documentos extensos.</li>
+ </ul>
+ <h2><i class="fa-solid fa-chart-pie"></i> Modelo de produto e escalabilidade</h2>
+ <p>O MoogIA foi pensado desde a origem como SaaS Freemium. O plano gratuito entrega a Mesa de Estudos e uso limitado de IA; os planos Pro e Master expandem jornadas, geração de conteúdo, análises e recursos premium. O processamento local reduz custo fixo e concentra custo variável nas chamadas de IA que geram valor real.</p>
+ <h2><i class="fa-solid fa-tower-broadcast"></i> Governança e resiliência</h2>
+ <p>Google Apps Script e Google Sheets sustentam o backend e a persistência de progresso em payloads JSON. A Torre de Controle acompanha heartbeats, módulos em uso e regras de XP. O SafeStorage combina memória e <code>localStorage</code> para preservar rascunhos e sessões mesmo sob restrições de tracking.</p>`
+},
+{
+ id:"rhc-pro",icon:"fa-chart-line",accentA:"#0ea5e9",accentB:"#6d5cff",
+ title:"RHC Pro v2: Enterprise Clinical Data Hub & BI",
+ subtitle:"Data Hub oncológico serverless para governança clínica, auditoria automatizada, Business Intelligence e relatórios executivos in-browser.",
+ thumb:"https://i.ibb.co/60L0J0FN/56db6501-bd91-4eaa-8d17-578bdc8421a2.png",
+ heroImg:"https://i.ibb.co/60L0J0FN/56db6501-bd91-4eaa-8d17-578bdc8421a2.png",
+ tags:["HealthTech","Business Intelligence","Library/Shell","Auditoria","LGPD"],
+ techs:["Google Apps Script","Google Sheets","Google Drive API","Vanilla JS","Chart.js","html2pdf.js","localStorage"],
+ metrics:["Filtros multidimensionais em milissegundos via Smart Cache","Auditoria temporal matemática para identificar perdas reais","Backups ZIP, cofre de snippets e mais de 15 temas corporativos"],
+ article:`
+ <h2><i class="fa-solid fa-triangle-exclamation"></i> O caos analógico: uma operação crítica sem memória institucional</h2>
+ <p>O Registro Hospitalar de Câncer precisava lidar com uma carga crescente de dados oncológicos, distribuída em dezenas de guias e etapas que não conversavam entre si. Para construir um indicador ou localizar uma inconsistência, era comum iniciar uma mineração manual longa — enquanto decisões e correções ficavam pouco rastreáveis.</p>
+ <ul>
+   <li><strong>Fragmentação extrema:</strong> dados em bases e guias isoladas, sem uma visão operacional integrada.</li>
+   <li><strong>Lentidão analítica:</strong> KPIs e indicadores como a Lei dos 60 Dias exigiam semanas de conferência manual.</li>
+   <li><strong>Risco de governança:</strong> ausência de trilha operacional clara dificultava auditoria e correção de erros.</li>
+ </ul>
+ <img src="https://github.com/user-attachments/assets/9f081a57-8189-47ad-8c1e-1d16de115192" alt="Planilha anterior e cenário de dados do RHC">
+ <h2><i class="fa-solid fa-diagram-project"></i> Arquitetura modular: RHC Core, Client Shells e RHC Pro Hub</h2>
+ <p>Para tornar a manutenção sustentável e a escalabilidade viável dentro do Google Workspace, o sistema foi dividido em três camadas. O padrão <strong>Library/Shell</strong> reduz duplicação de regras e permite que uma evolução no motor central seja refletida em toda a operação.</p>
+ <ul>
+   <li><strong>RHC Core (Library):</strong> motor central de regras de negócio e integrações, consumido como biblioteca pelas demais bases.</li>
+   <li><strong>Client Shells (Queries):</strong> planilhas operacionais que funcionam como cascas leves, conectadas ao Core por funções de ponte.</li>
+   <li><strong>RHC Pro Hub (V2):</strong> painel executivo com Gestor de Bases, POPs, backups, cofre de snippets e Business Intelligence.</li>
+ </ul>
+ <img src="https://github.com/user-attachments/assets/8eb5d33c-8fa3-48c2-998b-64816ea79840" alt="Central de bases do RHC Pro">
+ <h2><i class="fa-solid fa-bolt"></i> BI client-side: a resposta para os limites do servidor</h2>
+ <p>O limite de tempo do Google Apps Script pede uma escolha arquitetural: o servidor não deve executar tudo. No RHC Pro, dados preparados são injetados no <code>localStorage</code> e o navegador assume a parte interativa da análise.</p>
+ <ul>
+   <li><strong>Smart Cache V2:</strong> mudança de períodos e filtros cruzados — idade, etnia, topografias CID e desfechos clínicos — acontece sem reload e com resposta em milissegundos.</li>
+   <li><strong>DataViz dinâmico:</strong> Chart.js entrega evolução histórica e radares de proporcionalidade demográfica oncológica.</li>
+   <li><strong>PDF In-Browser Engine:</strong> o sistema clona o DOM, injeta CSS de impressão e gera relatórios executivos com <code>html2pdf.js</code> na memória local.</li>
+ </ul>
+ <img src="https://github.com/user-attachments/assets/dd04a0c1-2c24-484e-99b1-1c334e5aab14" alt="Dashboard de Business Intelligence RHC Pro">
+ <blockquote>“Transformar uma conferência manual de dias em um cruzamento de dados acionado em poucos segundos muda a capacidade de resposta da operação.”</blockquote>
+ <h2><i class="fa-solid fa-clock-rotate-left"></i> Auditoria contínua: a Máquina do Tempo</h2>
+ <p>O auditor percorre recursivamente o Drive, mapeando bases ativas, inativas e Queries Brutas. Para diferenciar uma perda real de uma situação válida, converte mês e ano em índices absolutos <code>(Ano * 12) + Mês</code>. Assim, reconhece justificativas temporais no passado (-12 meses) e no futuro (+2 meses), isolando somente os registros que exigem compliance.</p>
+ <h2><i class="fa-solid fa-hospital"></i> Gestor Clínico: padronização onde o dado nasce</h2>
+ <p>Uma interface injetada nas Queries orienta o preenchimento de Estadiamento TNM Patológico, razões de não tratamento e clínica de início. O Soft-Locking registra o estado global da linha em atendimento, evitando concorrência e sobrescrita de dados já auditados.</p>
+ <img src="https://github.com/user-attachments/assets/e5cae3dc-e6df-4bc5-a475-b957351d221d" alt="Gestor clínico injetado em planilha operacional">
+ <h2><i class="fa-solid fa-box-archive"></i> Backups e cofre de conhecimento técnico</h2>
+ <p>Rotinas em background consolidam arquivos do Drive em lotes ZIP por ano e sessão, aplicando retenção automática de 30 dias. No mesmo Hub, uma IDE leve preserva snippets SQL/GAS úteis para a equipe técnica, evitando que conhecimento operacional se perca em mensagens ou arquivos dispersos.</p>
+ <img src="https://github.com/user-attachments/assets/6c027e8e-25db-4ead-9f57-4fadfab0a661" alt="Central de backups do RHC Pro">
+ <h2><i class="fa-solid fa-palette"></i> Theming Engine corporativo</h2>
+ <p>Variáveis CSS permitem alternar mais de 15 esquemas visuais, incluindo Dark Mode, Light Clean, alto contraste e paletas institucionais. A camada visual não é cosmética: ela reduz fadiga cognitiva e dá adaptabilidade para perfis operacionais diferentes.</p>`
+},
+{
+ id:"smart-scheduling",icon:"fa-calendar-check",accentA:"#18b77d",accentB:"#1d90f5",
+ title:"Smart Scheduling Hub — HCPA",
+ subtitle:"Gestão cirúrgica com timeline visual, controle de acesso por função e integrações hospitalares em um único fluxo.",
+ thumb:"https://github.com/user-attachments/assets/ffb0e43b-d11d-42cc-8626-c9313ba0aecf",
+ heroImg:"https://github.com/user-attachments/assets/9966c830-c1b0-4632-97a7-1294d62f56e0",
+ tags:["HealthTech","Scheduling","RBAC","Google Drive"],
+ techs:["Google Apps Script","Vanilla JS","HTML5/CSS3","LockService","CacheService","Drive API"],
+ metrics:["Timeline por sala cirúrgica para leitura imediata de conflitos","RBAC para diferentes perfis operacionais","Dados e anexos centralizados em um único ponto"],
+ article:`<h2><i class="fa-solid fa-triangle-exclamation"></i> Uma agenda crítica presa à planilha</h2><p>O agendamento de cirurgias de convênio dependia de uma planilha extensa e estática. Visualizar vagas e equipes era difícil, os riscos de alteração acidental eram altos e anexos ou comunicações precisavam ser conduzidos em sistemas separados.</p><img src="https://github.com/user-attachments/assets/9966c830-c1b0-4632-97a7-1294d62f56e0" alt="Cenário anterior de agendamento"><h2><i class="fa-solid fa-calendar-days"></i> Uma SPA para a visão do dia</h2><p>A solução transforma dados da base em cards e timeline tipo swimlane por sala cirúrgica, permitindo leitura visual de conflitos e filtros rápidos por status.</p><img src="https://github.com/user-attachments/assets/ffb0e43b-d11d-42cc-8626-c9313ba0aecf" alt="Dashboard do Smart Scheduling"><h2><i class="fa-solid fa-user-shield"></i> RBAC para uma operação segura</h2><ul><li><strong>Super Admin / Agendamento:</strong> CRUD completo.</li><li><strong>Autorização:</strong> campos financeiros e técnicos.</li><li><strong>Guichê / Recepção:</strong> atualização focada em check-in.</li><li><strong>Leitores:</strong> visualização sem alterar dados.</li></ul><h2><i class="fa-solid fa-link"></i> Drive e WhatsApp dentro do fluxo</h2><p>O sistema cria pastas padronizadas no Drive a partir do modal do paciente e monta mensagens com checklist e cálculo de horário de chegada para WhatsApp Web. A operação deixa de alternar entre ferramentas para concluir uma mesma tarefa.</p><img src="https://github.com/user-attachments/assets/371d1231-3d16-45e0-a671-669655e9ef55" alt="Detalhe do fluxo cirúrgico"><h2><i class="fa-solid fa-gears"></i> Engenharia para simultaneidade</h2><p><code>LockService</code> ajuda a proteger edições concorrentes; <code>CacheService</code> reduz leituras repetidas em horários de pico; e rotinas de verificação antecipam riscos antes de cancelamentos ou movimentações sensíveis.</p>`
+},
+{
+ id:"smart-requests",icon:"fa-folder-open",accentA:"#f97316",accentB:"#ef476f",
+ title:"Smart Requests Manager",
+ subtitle:"Gestão segura do ciclo de vida de requerimentos e prontuários médicos, com compliance, Drive e mensageria assíncrona.",
+ thumb:"https://github.com/user-attachments/assets/d0aff338-e047-4f0f-804f-3c9447cbc145",
+ heroImg:"https://github.com/user-attachments/assets/c181eac6-1098-4221-878b-ef222dc4e6bb",
+ tags:["LGPD","Workflow","Soft Lock","PDF Engine"],
+ techs:["Google Apps Script","Drive API","Gmail API","pdf-lib","pdf.js","Regex"],
+ metrics:["Soft-lock de 15 minutos contra race conditions","Fallback de PDFs corrompidos via canvas","Liberação condicionada por workflow de LGPD"],
+ article:`<h2><i class="fa-solid fa-triangle-exclamation"></i> Liberação de documentos exige controle</h2><p>Solicitações de prontuários médicos misturam dados sensíveis, diferentes tipos de requerentes e arquivos heterogêneos. O fluxo anterior, baseado em planilhas, tinha risco de edição concorrente, organização manual de pastas e pouca segurança para solicitações feitas por terceiros.</p><img src="https://github.com/user-attachments/assets/d0aff338-e047-4f0f-804f-3c9447cbc145" alt="Fluxo do Smart Requests"><h2><i class="fa-solid fa-file-pdf"></i> Motor resiliente de PDFs no cliente</h2><p>Arquivos pesados são tratados na memória do navegador. PDFs, JPGs e PNGs podem ser convertidos e mesclados em volume único. Quando um PDF fora do padrão quebra a biblioteca primária, <code>pdf.js</code> rasteriza o arquivo em canvas e reconstrói um documento limpo para o Drive.</p><h2><i class="fa-solid fa-shield-halved"></i> Smart Status e compliance LGPD</h2><ul><li><strong>Próprio paciente:</strong> pasta provisionada com acesso por link em ambiente controlado.</li><li><strong>Terceiros:</strong> pasta inicia privada, a tela exige documentação legal e bloqueia continuidade até validação.</li><li><strong>Trilha guiada:</strong> regras e estados tornam o que pode ou não pode ser feito explícito para o operador.</li></ul><h2><i class="fa-solid fa-lock"></i> Soft-Locking para proteger a fila</h2><p>Ao abrir uma linha, o sistema sinaliza que ela está em uso por um operador. Um TTL de 15 minutos reduz conflito de edição, evita sobrescrita e preserva a integridade de uma fila compartilhada.</p><h2><i class="fa-solid fa-envelope-open-text"></i> Parsing e mensageria assíncrona</h2><p>Regex interpreta conteúdo de e-mails e preenche datas, tipos documentais e campos estruturados. O envio de mensagens pesadas é encaminhado a uma planilha-robô com triggers, mantendo a interface do usuário responsiva.</p>`
+},
+{
+ id:"doc-count",icon:"fa-box-archive",accentA:"#9d5cff",accentB:"#ff4f90",
+ title:"Sistema Integrado de Contagem de Documentos",
+ subtitle:"Gestão documental hospitalar com OCR, produtividade orientada por teclado, analytics e ferramentas PDF integradas.",
+ thumb:"https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f",
+ heroImg:"https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f",
+ tags:["OCR","Document Management","Analytics","Bootstrap"],
+ techs:["Google Apps Script","Bootstrap 5","OCR.space API","Chart.js","pdf-lib","localStorage"],
+ metrics:["OCR reduz a carga de digitação manual","Autocomplete prioriza tipos documentais recorrentes","Rascunhos sobrevivem ao fechamento acidental"],
+ article:`<h2><i class="fa-solid fa-triangle-exclamation"></i> Gestão documental fragmentada</h2><p>O controle de documentos e prontuários era feito em dezenas de guias. Extrair métricas cruzadas demandava esforço manual, volumes altos travavam a planilha padrão e lançamentos repetitivos ampliavam o risco de erro.</p><h2><i class="fa-solid fa-database"></i> Uma base central e uma interface de trabalho</h2><p>A aplicação usa Google Apps Script como backend/API e entrega uma experiência HTML, JavaScript e Bootstrap para que a equipe trabalhe na interface, não na planilha que sustenta os dados.</p><h2><i class="fa-solid fa-wand-magic-sparkles"></i> Recursos orientados à produtividade</h2><ul><li><strong>OCR:</strong> leitura de documentos escaneados para preencher campos automaticamente.</li><li><strong>Autocomplete VIP:</strong> histórico de uso leva tipos documentais frequentes ao topo das sugestões.</li><li><strong>Analytics:</strong> evolução mensal e rankings dinâmicos com Chart.js.</li><li><strong>Estúdio PDF lazy-loaded:</strong> ferramentas carregadas só quando necessárias para poupar memória.</li><li><strong>Etiquetas:</strong> geração e paginação de rótulos para rastreamento físico.</li></ul><img src="https://github.com/user-attachments/assets/f732a9a4-ad81-439d-adff-3a14e8be6d7f" alt="Sistema integrado de documentos"><h2><i class="fa-solid fa-keyboard"></i> Fluidez para uso repetitivo</h2><p>Cache, processamento em lote e <code>localStorage</code> evitam perdas e chamadas excessivas. A navegação foi refinada para teclado, com eventos de Enter adaptados ao fluxo de lançamento.</p>`
+},
+{
+ id:"estudio-pdf",icon:"fa-file-pdf",accentA:"#ef4444",accentB:"#ff8e3c",
+ title:"Estúdio PDF Pro & AI Suite",
+ subtitle:"Suíte premium de PDFs e IA client-side: produtividade corporativa com privacidade absoluta e arquitetura modular.",
+ thumb:"https://github.com/user-attachments/assets/9777f096-09ab-4ddf-ade9-19eb597cfef2",
+ heroImg:"https://github.com/user-attachments/assets/81db6cc4-8816-4b7c-975e-b2d307935387",
+ tags:["Client-side","LGPD","PDF","IA","Library/Shell"],
+ techs:["Google Apps Script","pdf-lib","pdf.js","tesseract.js","html2canvas","Bootstrap 5"],
+ metrics:["Mais de 15 ferramentas de PDF nativas","Arquivos manipulados na memória local","Torre de Controle com heartbeat de uso"],
+ article:`<h2><i class="fa-solid fa-triangle-exclamation"></i> Segurança versus produtividade</h2><p>Quando setores administrativos e clínicos não têm uma ferramenta oficial ágil, o caminho fácil costuma ser enviar PDFs para sites externos. Para dados corporativos e médicos, isso representa risco de vazamento, dependência de limites de upload e custos de licenças por estação.</p><h2><i class="fa-solid fa-laptop-code"></i> O navegador como servidor</h2><p>A arquitetura inverte a lógica tradicional: o servidor entrega o motor e o navegador executa as operações. Com <code>pdf-lib</code>, <code>pdf.js</code> e <code>tesseract.js</code>, a manipulação binária acontece na RAM local e o arquivo não precisa sair do ambiente corporativo.</p><img src="https://github.com/user-attachments/assets/9777f096-09ab-4ddf-ade9-19eb597cfef2" alt="Processamento PDF do Estúdio Pro"><h2><i class="fa-solid fa-brain"></i> Assistente de leitura com IA</h2><ul><li><strong>Chat com PDF:</strong> interação conversacional ancorada no documento carregado.</li><li><strong>Resumo e extração:</strong> tópicos e sínteses executivas de arquivos extensos.</li><li><strong>Quiz:</strong> questões de múltipla escolha com gabarito a partir do conteúdo.</li><li><strong>Leitor Imersivo:</strong> TTS com destaque sincronizado estilo karaokê.</li><li><strong>Tradução nativa:</strong> apoio à leitura preservando jargão e contexto técnico.</li></ul><img src="https://github.com/user-attachments/assets/81db6cc4-8816-4b7c-975e-b2d307935387" alt="Recursos de IA do Estúdio PDF"><h2><i class="fa-solid fa-screwdriver-wrench"></i> Mais de 15 ferramentas locais</h2><p>Faxina de páginas em branco, Merge & Split, Flatten, redact irreversível, OCR local, timbre, marca d’água e conversão assistida. O uso é apoiado por Drag & Drop, ações em lote e um visualizador fullscreen com lupa de inspeção.</p><h2><i class="fa-solid fa-cubes"></i> Library/Shell e Torre de Controle</h2><p>O Core centraliza lógica e interface, enquanto diferentes setores invocam o componente via HtmlService. Um heartbeat a cada 30 segundos permite acompanhar usuários ativos, e-mails institucionais e ferramentas abertas no painel administrativo.</p><h2><i class="fa-solid fa-sparkles"></i> Uma experiência premium, sem sacrificar segurança</h2><p>Glassmorphism, loaders, micro-interações e theming tornam a operação mais agradável; o objetivo, porém, continua funcional: reduzir fricção, prevenir erro e entregar ferramentas que as equipes realmente escolhem usar.</p>`
+}
+];
 
-    const $ = (selector) => document.querySelector(selector);
+const $=s=>document.querySelector(s);
+const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+const tagsHTML=tags=>tags.map(t=>`<span class="tag">${escapeHTML(t)}</span>`).join("");
 
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, char => ({
-        "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
-      }[char]));
-    }
+function renderGrid(){
+  const grid=$("#project-grid");
+  if(!grid){console.error("Elemento #project-grid não encontrado.");return;}
+  grid.innerHTML=projetos.map(p=>`
+    <article class="project" style="--accentA:${p.accentA};--accentB:${p.accentB}" onclick="openProject('${p.id}')">
+      <div class="art"><div class="fallback"><i class="fa-solid ${p.icon}"></i></div>
+      <img src="${p.thumb}" alt="Prévia de ${escapeHTML(p.title)}" loading="lazy" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'">
+      <span class="picon"><i class="fa-solid ${p.icon}"></i></span></div>
+      <div class="project-body"><h3>${escapeHTML(p.title)}</h3><p>${escapeHTML(p.subtitle)}</p><div class="tags">${tagsHTML(p.tags)}</div><div class="card-link">Ver arquitetura, impacto e engenharia <i class="fa-solid fa-arrow-right"></i></div></div>
+    </article>`).join("");
+}
+function openProject(id){
+  const p=projetos.find(x=>x.id===id);if(!p)return;
+  $("#proj-title").textContent=p.title;$("#proj-subtitle").textContent=p.subtitle;$("#proj-tags").innerHTML=tagsHTML(p.tags);$("#proj-techs").innerHTML=tagsHTML(p.techs);$("#proj-metrics").innerHTML=p.metrics.map(m=>`<li><i class="fa-solid fa-circle-check"></i><span>${escapeHTML(m)}</span></li>`).join("");$("#proj-article").innerHTML=p.article;
+  const cover=$("#proj-hero-img");cover.src=p.heroImg;cover.alt=`Capa do projeto ${p.title}`;cover.style.display="block";cover.onerror=()=>cover.style.display="none";
+  $("#main-view").style.display="none";$("#project-view").style.display="block";window.scrollTo({top:0,behavior:"instant"});history.replaceState(null,"",`#${id}`);
+}
+function closeProject(){$("#project-view").style.display="none";$("#main-view").style.display="block";history.replaceState(null,"","#projetos");setTimeout(()=>$("#projetos")?.scrollIntoView({behavior:"smooth"}),25)}
+const toggle=$("#theme-toggle"),themeIcon=$("#theme-icon");
+function applyTheme(isDark){
+  document.body.classList.toggle("dark-mode",isDark);
+  themeIcon.className=isDark?"fa-solid fa-moon":"fa-solid fa-sun";
+  localStorage.setItem("leuklein-theme",isDark?"dark":"light");
+}
+toggle.addEventListener("click",()=>applyTheme(!document.body.classList.contains("dark-mode")));
+applyTheme(localStorage.getItem("leuklein-theme")==="dark");
 
-    function tagsHTML(tags) {
-      return tags.map(tag => `<span class="tag">${escapeHTML(tag)}</span>`).join("");
-    }
-
-    function renderGrid() {
-      const grid = $("#project-grid");
-      if (!grid) {
-        console.error("Elemento #project-grid não encontrado. Verifique se a seção de projetos está presente no HTML.");
-        return;
-      }
-
-      grid.innerHTML = projetos.map(project => `
-        <article class="project-card" style="--accentA:${project.accentA}; --accentB:${project.accentB}" onclick="openProject('${project.id}')">
-          <div class="card-art">
-            <div class="card-fallback"><i class="fa-solid ${project.icon}"></i></div>
-            <img src="${project.thumb}" alt="Prévia de ${escapeHTML(project.title)}" loading="lazy"
-                 onload="this.previousElementSibling.style.display='none'"
-                 onerror="this.style.display='none'">
-            <span class="card-icon"><i class="fa-solid ${project.icon}"></i></span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">${escapeHTML(project.title)}</h3>
-            <p class="card-desc">${escapeHTML(project.subtitle)}</p>
-            <div class="tags">${tagsHTML(project.tags)}</div>
-            <div class="card-link">Ler estudo de caso <i class="fa-solid fa-arrow-right"></i></div>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function openProject(id) {
-      const project = projetos.find(item => item.id === id);
-      if (!project) return;
-
-      $("#proj-title").textContent = project.title;
-      $("#proj-subtitle").textContent = project.subtitle;
-      $("#proj-tags").innerHTML = tagsHTML(project.tags);
-      $("#proj-techs").innerHTML = tagsHTML(project.techs);
-      $("#proj-metrics").innerHTML = project.metrics.map(item =>
-        `<li><i class="fa-solid fa-circle-check"></i><span>${escapeHTML(item)}</span></li>`
-      ).join("");
-      $("#proj-article").innerHTML = project.article;
-
-      const cover = $("#proj-hero-img");
-      cover.src = project.heroImg;
-      cover.alt = `Capa do projeto ${project.title}`;
-      cover.onerror = () => {
-        cover.style.display = "none";
-      };
-      cover.style.display = "block";
-
-      $("#main-view").style.display = "none";
-      $("#project-view").style.display = "block";
-      window.scrollTo({ top: 0, behavior: "instant" });
-      history.replaceState(null, "", `#${id}`);
-    }
-
-    function closeProject() {
-      $("#project-view").style.display = "none";
-      $("#main-view").style.display = "block";
-      history.replaceState(null, "", "#projetos");
-      setTimeout(() => $("#projetos")?.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
-    }
-
-    // Tema
-    const themeToggle = $("#theme-toggle");
-    const themeIcon = $("#theme-icon");
-
-    function applyTheme(isLight) {
-      document.body.classList.toggle("light-mode", isLight);
-      themeIcon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
-      localStorage.setItem("leuklein-theme", isLight ? "light" : "dark");
-    }
-
-    themeToggle.addEventListener("click", () => applyTheme(!document.body.classList.contains("light-mode")));
-    applyTheme(localStorage.getItem("leuklein-theme") === "light");
-
-    // Partículas: leve e contínuo, respeita preferências de redução de movimento.
-    (function initParticles() {
-      const canvas = document.getElementById("particle-canvas");
-      const ctx = canvas.getContext("2d");
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let width, height, particles = [];
-
-      function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.min(62, Math.max(26, Math.floor(width / 25)));
-        particles = Array.from({ length: count }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 1.8 + .45,
-          vx: (Math.random() - .5) * .22,
-          vy: (Math.random() - .5) * .22,
-          alpha: Math.random() * .55 + .18
-        }));
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, width, height);
-        const light = document.body.classList.contains("light-mode");
-
-        particles.forEach((p, index) => {
-          if (!reducedMotion) {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < -20) p.x = width + 20;
-            if (p.x > width + 20) p.x = -20;
-            if (p.y < -20) p.y = height + 20;
-            if (p.y > height + 20) p.y = -20;
-          }
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = light ? `rgba(18, 115, 220, ${p.alpha * .45})` : `rgba(76, 198, 255, ${p.alpha})`;
-          ctx.fill();
-
-          for (let j = index + 1; j < particles.length; j++) {
-            const q = particles[j];
-            const dx = p.x - q.x, dy = p.y - q.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < 115) {
-              ctx.beginPath();
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(q.x, q.y);
-              const opacity = (1 - dist / 115) * (light ? .09 : .13);
-              ctx.strokeStyle = light ? `rgba(65, 108, 190, ${opacity})` : `rgba(89, 168, 255, ${opacity})`;
-              ctx.lineWidth = .55;
-              ctx.stroke();
-            }
-          }
-        });
-
-        if (!reducedMotion) requestAnimationFrame(draw);
-      }
-
-      resize();
-      draw();
-      window.addEventListener("resize", resize);
-    })();
-
-    // Inicialização segura: evita o erro "Cannot set properties of null".
-    document.addEventListener("DOMContentLoaded", () => {
-      renderGrid();
-      const hash = window.location.hash.slice(1);
-      if (hash && projetos.some(project => project.id === hash)) openProject(hash);
-    });
-  </script>
+(function particles(){
+ const c=document.getElementById("particle-canvas"),ctx=c.getContext("2d"),reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;let w,h,pts=[];
+ function resize(){const d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;c.style.width=w+"px";c.style.height=h+"px";ctx.setTransform(d,0,0,d,0,0);pts=Array.from({length:Math.min(62,Math.max(26,Math.floor(w/25)))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.8+.45,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,a:Math.random()*.55+.18}))}
+ function draw(){ctx.clearRect(0,0,w,h);const light=!document.body.classList.contains("dark-mode");pts.forEach((p,i)=>{if(!reduce){p.x+=p.vx;p.y+=p.vy;if(p.x<-20)p.x=w+20;if(p.x>w+20)p.x=-20;if(p.y<-20)p.y=h+20;if(p.y>h+20)p.y=-20}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=light?`rgba(18,115,220,${p.a*.45})`:`rgba(76,198,255,${p.a})`;ctx.fill();for(let j=i+1;j<pts.length;j++){const q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<115){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=light?`rgba(65,108,190,${(1-d/115)*.09})`:`rgba(89,168,255,${(1-d/115)*.13})`;ctx.lineWidth=.55;ctx.stroke()}}});if(!reduce)requestAnimationFrame(draw)}
+ resize();draw();addEventListener("resize",resize);
+})();
+document.addEventListener("DOMContentLoaded",()=>{renderGrid();const h=location.hash.slice(1);if(h&&projetos.some(p=>p.id===h))openProject(h)});
+</script>
 </body>
 </html>
